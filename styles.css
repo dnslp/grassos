@@ -1,0 +1,245 @@
+/* ============== GLOBAL RESET ============== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden; /* We'll manage scrollbars ourselves */
+}
+
+/* ================= LOGIN SCREEN ================= */
+#login-screen {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    url('https://i.imgur.com/8J3yf4r.png') center/cover no-repeat, /* optional vintage lawn texture */
+    linear-gradient(135deg, #a8e063, #56ab2f); /* vibrant summer greens */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: rgba(255,255,255,0.95);
+  padding: 2rem 3rem;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  text-align: center;
+  width: 320px;
+}
+
+.login-card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #2e7d32;
+}
+.grass-text {
+  font-family: 'Courier New', Courier, monospace;
+  color: #558b2f;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+}
+
+.avatar-selection p {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #33691e;
+}
+.avatars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.avatar-btn {
+  background: #fff;
+  border: 2px solid #a5d6a7;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.avatar-btn:hover, .avatar-btn.selected {
+  border-color: #558b2f;
+  transform: scale(1.1);
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.login-card label {
+  text-align: left;
+  color: #33691e;
+  font-weight: 500;
+}
+.login-card input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #c8e6c9;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.login-card input:focus {
+  outline: none;
+  border-color: #66bb6a;
+}
+
+.login-btn {
+  margin-top: 1rem;
+  background: #7cb342;
+  color: #fff;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.login-btn:hover {
+  background: #689f38;
+}
+
+/* ================= DESKTOP SCREEN ================= */
+#desktop-screen {
+  display: none; /* hidden until login */
+  width: 100%;
+  height: 100%;
+  background: 
+    url('https://i.imgur.com/8J3yf4r.png') center/cover no-repeat, /* optional: same vintage lawn texture */ 
+    #a5d6a7; /* base green */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Toolbar at top */
+#toolbar {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(30, 60, 30, 0.85);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  color: #e8f5e9;
+  font-weight: 500;
+}
+#start-button {
+  background: #33691e;
+  padding: 4px 12px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#start-button:hover {
+  background: #2e7d32;
+}
+.clock {
+  margin-left: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Desktop area */
+#desktop-area {
+  position: absolute;
+  top: 40px; left: 0;
+  width: 100%;
+  height: calc(100% - 40px);
+  background: rgba(165, 214, 167, 0.6); /* semi-transparent grass-green overlay */
+  display: flex;
+  align-items: flex-start;
+  padding: 1rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
+/* Icon style */
+.icon {
+  width: 80px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: transform 0.2s;
+}
+.icon:hover {
+  transform: scale(1.1);
+}
+.icon-img {
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+.icon-label {
+  font-size: 0.9rem;
+  color: #2e7d32;
+}
+
+/* Simple “bounce” animation on click */
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-10px); }
+  60%  { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+/* ============== “Learn to Code” MODAL ============== */
+.modal-hidden {
+  display: none;
+}
+#code-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-content {
+  background: #f1f8e9;
+  padding: 2rem;
+  border-radius: 6px;
+  width: 500px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  max-height: 80%;
+}
+#modal-close {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.modal-content h2 {
+  color: #33691e;
+  margin-bottom: 1rem;
+}
+.modal-content pre {
+  background: #e8f5e9;
+  padding: 0.75rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+.modal-content code {
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 0.9rem;
+  display: block;
+  white-space: pre-wrap;
+}
