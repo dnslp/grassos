@@ -1,5 +1,12 @@
 const win95Sound = document.getElementById('win95-sound');
 const nt4Sound = document.getElementById('nt4-sound');
+
+// Modal Elements
+const codeModal = document.getElementById('code-modal');
+const modalCloseBtn = document.getElementById('modal-close');
+const modalDescription = document.getElementById('modal-description');
+const modalCssCode = document.getElementById('modal-css-code');
+
 function playStartupSounds() {
   win95Sound.playbackRate = 0.6; nt4Sound.playbackRate = 0.6;
   win95Sound.currentTime = 0; win95Sound.play();
@@ -9,16 +16,16 @@ function playStartupSounds() {
 const loginScreen = document.getElementById('login-screen');
 const desktopScreen = document.getElementById('desktop-screen');
 const loginForm = document.getElementById('login-form');
-let selectedAvatar = null;
-document.querySelectorAll('.avatar-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected'); selectedAvatar = btn.dataset.avatar;
-  });
-});
+// let selectedAvatar = null; // Removed avatar logic
+// document.querySelectorAll('.avatar-btn').forEach(btn => { // Removed avatar logic
+//   btn.addEventListener('click', () => { // Removed avatar logic
+//     document.querySelectorAll('.avatar-btn').forEach(b => b.classList.remove('selected')); // Removed avatar logic
+//     btn.classList.add('selected'); selectedAvatar = btn.dataset.avatar; // Removed avatar logic
+//   }); // Removed avatar logic
+// }); // Removed avatar logic
 loginForm.addEventListener('submit', e => {
   e.preventDefault();
-  if (!selectedAvatar) { alert('Please select an avatar!'); return; }
+  // if (!selectedAvatar) { alert('Please select an avatar!'); return; } // Removed avatar check
   loginScreen.style.transition = 'opacity 0.8s';
   loginScreen.style.opacity = '0';
   setTimeout(() => {
@@ -47,8 +54,11 @@ function startClock() {
 function showWelcomePopup() {
   const popup = document.createElement('div');
   popup.textContent = `Hello, ${document.getElementById('username').value}!`;
+  popup.className = 'welcome-popup retro-popup'; // Added a class
   popup.style.position = 'fixed'; popup.style.bottom = '20px'; popup.style.right = '20px';
-  popup.style.background = '#33691e'; popup.style.color = '#fff'; popup.style.padding = '0.5rem 1rem';
+  // popup.style.background = '#33691e'; // Remove this
+  // popup.style.color = '#fff'; // Remove this
+  popup.style.padding = '0.5rem 1rem';
   popup.style.borderRadius = '4px'; popup.style.boxShadow = '0 5px 10px rgba(0,0,0,0.3)';
   popup.style.opacity = '0'; popup.style.transition = 'opacity 0.5s';
   document.body.appendChild(popup);
@@ -84,8 +94,30 @@ animationIcons.forEach(icon => {
     const desc = icon.dataset.desc || '';
     const css = icon.dataset.css || '';
     showDesktopMessage(desc, css);
+
+    // Populate and show the code modal
+    if (codeModal) {
+      modalDescription.textContent = desc;
+      modalCssCode.textContent = css;
+      codeModal.classList.remove('modal-hidden');
+    }
   });
 });
+
+// Modal Close Logic
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener('click', () => {
+    if (codeModal) codeModal.classList.add('modal-hidden');
+  });
+}
+
+if (codeModal) {
+  codeModal.addEventListener('click', (event) => {
+    if (event.target === codeModal) { // Clicked on the modal backdrop
+      codeModal.classList.add('modal-hidden');
+    }
+  });
+}
 
 /* Desktop message logic */
 function showDesktopMessage(text, cssCode) {

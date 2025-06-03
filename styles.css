@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
   margin: 0;
@@ -10,8 +10,9 @@ body,
 html {
   width: 100%;
   height: 100%;
-font-family: monospace;
+  font-family: 'Press Start 2P', monospace; /* Changed font */
   overflow: hidden;
+  color: #33FF33; /* Added global text color */
 }
 
 #login-screen {
@@ -20,62 +21,37 @@ font-family: monospace;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png') center/cover no-repeat, linear-gradient(135deg, #a8e063, #56ab2f);
+  background-color: #1A1A1A; /* Changed background */
+  color: #33FF33; /* Added text color */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem 3rem;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: #2C2C2C; /* Changed background */
+  padding: 1.5rem 2rem; /* Adjusted padding */
+  border-radius: 0px; /* Adjusted border-radius */
+  box-shadow: 0 0 15px #33FF3330; /* Changed shadow */
   text-align: center;
   width: 320px;
+  border: 2px solid #33FF33; /* Added border */
 }
 
 .login-card h1 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #2e7d32;
+  color: #33FF33; /* Changed color */
+  font-family: 'Press Start 2P', monospace; /* Added font */
 }
 
 .grass-text {
-  font-family: 'Courier New', Courier, monospace;
-  color: #558b2f;
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  font-family: 'Press Start 2P', monospace; /* Changed font */
+  color: #66FF66; /* Changed color */
+  text-shadow: 1px 1px 0px #00000060; /* Changed shadow */
 }
 
-.avatar-selection p {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #33691e;
-}
-
-.avatars {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.avatar-btn {
-  background: #fff;
-  border: 2px solid #a5d6a7;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.avatar-btn:hover,
-.avatar-btn.selected {
-  border-color: #558b2f;
-  transform: scale(1.1);
-}
+/* Removed .avatar-selection p, .avatars, .avatar-btn, and .avatar-btn:hover, .avatar-btn.selected */
 
 .login-card form {
   display: flex;
@@ -85,44 +61,56 @@ font-family: monospace;
 
 .login-card label {
   text-align: left;
-  color: #33691e;
+  color: #33FF33; /* Changed color */
   font-weight: 500;
 }
 
 .login-card input {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid #c8e6c9;
-  border-radius: 4px;
+  border: 2px solid #339933; /* Changed border */
+  background: #111111; /* Changed background */
+  color: #33FF33; /* Changed color */
+  border-radius: 0px; /* Adjusted border-radius */
   font-size: 1rem;
+}
+
+.login-card input::placeholder {
+  color: #228822; /* Added placeholder color */
 }
 
 .login-card input:focus {
   outline: none;
-  border-color: #66bb6a;
+  border-color: #66FF66; /* Changed border color */
 }
 
 .login-btn {
   margin-top: 1rem;
-  background: #7cb342;
-  color: #fff;
+  background: #228822; /* Changed background */
+  color: #FFFFFF; /* Changed color */
   padding: 0.6rem;
   font-size: 1rem;
-  border: none;
-  border-radius: 4px;
+  border: 2px solid; /* Base for detailed border colors */
+  border-top-color: #44FF44; /* Lighter green for top */
+  border-left-color: #44FF44; /* Lighter green for left */
+  border-right-color: #228822; /* Darker green for right */
+  border-bottom-color: #228822; /* Darker green for bottom */
+  border-radius: 0px; /* Adjusted border-radius */
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .login-btn:hover {
-  background: #689f38;
+  background: #33AA33; /* Changed background */
+  border-color: #66FF66; /* Added border color */
 }
 
 #desktop-screen {
   display: none;
   width: 100%;
   height: 100%;
-  background: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png') center/cover no-repeat, linear-gradient(135deg, #a8e063, #56ab2f);
+  background-color: #1A1A1A; /* Changed background */
+  color: #33FF33; /* Added text color */
   position: relative;
   overflow: hidden;
 }
@@ -132,40 +120,49 @@ font-family: monospace;
   top: 0;
   left: 0;
   width: 100%;
-  height: 40px;
-  background: rgba(30, 60, 30, 0.85);
+  height: 30px; /* Adjusted height */
+  background: #222222; /* Changed background */
+  border-bottom: 2px solid #33FF33; /* Added border */
+  border-top: 1px solid #444444; /* Added top highlight */
   display: flex;
   align-items: center;
-  padding: 0 1rem;
-  color: #e8f5e9;
+  padding: 0 0.5rem; /* Adjusted padding */
+  color: #33FF33; /* Changed color */
   font-weight: 500;
   z-index: 10;
 }
 
 #start-button {
-  background: #33691e;
-  padding: 4px 12px;
-  border-radius: 3px;
+  background: #228822; /* Changed background */
+  color: #FFFFFF; /* Changed color */
+  padding: 2px 8px; /* Adjusted padding */
+  border-radius: 0; /* Changed border-radius */
+  border: 2px solid; /* Base for detailed border colors */
+  border-top-color: #44FF44; /* Lighter green for top */
+  border-left-color: #44FF44; /* Lighter green for left */
+  border-right-color: #228822; /* Darker green for right */
+  border-bottom-color: #228822; /* Darker green for bottom */
+  font-size: 0.9em; /* Slightly smaller font */
   display: flex;
   align-items: center;
-  gap: 4px;
+  /* gap: 4px; Removed gap as emoji is removed */
   cursor: pointer;
   transition: background 0.2s;
 }
 
 #start-button:hover {
-  background: #2e7d32;
+  background: #33AA33; /* Changed background */
 }
 
 .clock {
   margin-left: auto;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Press Start 2P', monospace; /* Changed font */
 }
 
 #info-btn {
-  background: #fff;
-  color: #33691e;
-  border: none;
+  background: #222222; /* Changed background */
+  color: #33FF33; /* Changed color */
+  border: 1px solid #33FF33; /* Added border */
   border-radius: 50%;
   font-size: 1.4rem;
   width: 32px;
@@ -176,7 +173,7 @@ font-family: monospace;
 }
 
 #info-btn:hover {
-  background: #b3e7ae;
+  background: #333333; /* Changed background */
 }
 
 #desktop-area {
@@ -185,7 +182,7 @@ font-family: monospace;
   left: 0;
   width: 100%;
   height: calc(100% - 40px);
-  background: rgba(165, 214, 167, 0.6);
+  /* background: rgba(165, 214, 167, 0.6); Removed background */
   display: flex;
   align-items: flex-start;
   padding: 1rem;
@@ -195,26 +192,42 @@ font-family: monospace;
 }
 
 .icon {
-  width: 100px;
+  width: 80px; /* Adjust size */
+  height: 80px; /* Adjust size */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #33FF33; /* Green border */
+  background-color: #2C2C2C; /* Dark background for the icon box */
+  border-radius: 0px; /* Sharp corners */
   text-align: center;
   cursor: pointer;
-  margin-bottom: 1.5rem;
-  transition: transform 0.2s, filter 0.2s;
+  margin-bottom: 1rem; /* Keep or adjust spacing */
+  transition: transform 0.2s, background-color 0.2s; /* Keep existing transitions or simplify */
 }
 
 .icon:hover {
-  transform: scale(1.15);
+  transform: none; /* Remove scaling to keep it blocky, or make it a very slight scale */
+  background-color: #333333; /* Slightly lighter on hover */
+  border-color: #66FF66; /* Brighter border on hover */
 }
 
 .icon-img {
-  font-size: 4rem;
-  margin-bottom: 0.4rem;
-  pointer-events: none;
+  font-size: 2.5rem; /* Adjust size of the letter/symbol */
+  color: #33FF33; /* Green color for the letter/symbol */
+  margin-bottom: 0.2rem; /* Space between letter and label */
+  pointer-events: none; /* Keep this */
 }
 
 .icon-label {
-  font-size: 1.2rem;
-  color: #2e7d32;
+  font-size: 0.8em; /* Adjust size as needed with the new font */
+  color: #33FF33; /* Ensure it's green */
+  font-family: 'Press Start 2P', monospace; /* Added font */
+}
+
+.login-card input, .login-btn, button { /* General button styling for font */
+    font-family: 'Press Start 2P', monospace;
 }
 
 /* Animation classes */
@@ -467,14 +480,14 @@ font-family: monospace;
 
 /* Desktop message */
 #desktop-message {
-  position: absolute;
+  position: absolute; /* Keep absolute for positioning on screen */
   bottom: 20px;
   left: 20px;
-  background: rgba(48, 63, 159, 0.92);
-  color: #fff;
-  padding: 0.8rem 1rem;
-  border-radius: 4px;
-  font-size: 2rem;
+  background: #2C2C2C; /* Changed background */
+  color: #33FF33; /* Changed color */
+  padding: 25px 1rem 0.8rem 1rem; /* Adjusted padding for title bar */
+  border-radius: 0px; /* Ensured sharp corners */
+  font-size: 2rem; /* This is for the main text, title will be smaller */
   max-width: none;
   min-width: 160px;
   min-height: 40px;
@@ -482,16 +495,38 @@ font-family: monospace;
   transition: opacity 0.4s;
   pointer-events: none;
   z-index: 100;
+  border: 2px solid #33FF33; /* Added border */
+  box-shadow: 0 0 10px #33FF3330; /* Added shadow */
+  position: relative; /* For pseudo-element positioning */
+}
+
+#desktop-message::before {
+  content: "SYSTEM MESSAGE"; /* Title bar text */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Title bar height */
+  background-color: #33FF33; /* Green title bar */
+  color: #1A1A1A; /* Dark text on green title bar */
+  font-family: 'Press Start 2P', monospace; /* Ensure pixel font */
+  font-size: 0.8em; /* Title bar font size */
+  padding: 2px 5px; /* Padding within the title bar */
+  box-sizing: border-box;
+  text-align: left;
 }
 
 #desktop-message .desc {
   font-size: 1.2rem;
   margin-bottom: 0.2rem;
+  color: #33FF33; /* Changed color */
 }
 
 #desktop-message .css-code {
   font-size: 1.2rem;
-  background: rgba(0, 0, 0, 0.13);
+  background: #111111; /* Changed background */
+  color: #66FF66; /* Changed color */
+  border: 1px solid #228822; /* Added border */
   border-radius: 3px;
   padding: 3px 5px;
   margin: 0;
@@ -516,15 +551,16 @@ font-family: monospace;
 }
 
 .modal-content {
-  background: #f1f8e9;
+  background: #2C2C2C; /* Changed background */
   padding: 2rem;
   border-radius: 6px;
   width: 500px;
   max-width: 90%;
   position: relative;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Kept shadow, can adjust if needed */
   overflow-y: auto;
   max-height: 80%;
+  border: 2px solid #33FF33; /* Added border */
 }
 
 #modal-close {
@@ -533,24 +569,27 @@ font-family: monospace;
   right: 12px;
   font-size: 1.5rem;
   cursor: pointer;
+  color: #33FF33; /* Changed color */
 }
 
 .modal-content h2 {
-  color: #33691e;
+  color: #66FF66; /* Changed color */
   margin-bottom: 1rem;
 }
 
 .modal-content pre {
-  background: #e8f5e9;
+  background: #111111; /* Changed background */
   padding: 0.75rem;
   border-radius: 4px;
   overflow-x: auto;
   margin-bottom: 1rem;
+  border: 1px solid #228822; /* Added border */
 }
 
 .modal-content code {
-  font-family: Consolas, 'Courier New', monospace;
-  font-size: 0.97rem;
+  font-family: 'Press Start 2P', monospace; /* Ensure this uses the pixel font too */
+  color: #33FF33; /* Changed color */
+  font-size: 0.9rem; /* Adjusted size for pixel font */
   display: block;
   white-space: pre-wrap;
 }
@@ -567,14 +606,27 @@ font-family: monospace;
   }
 
   .icon {
-    width: 60px;
+    width: 60px; /* Ensure media query icon size is also adjusted if needed */
+    height: 60px;
   }
 
   .icon-img {
-    font-size: 1.5rem;
+    font-size: 1.8rem; /* Adjust media query icon font size */
   }
 
   .icon-label {
-    font-size: 0.8rem;
+    font-size: 0.7em; /* Adjust media query icon label font size */
   }
+}
+
+.retro-popup {
+  background-color: #2C2C2C; /* Same as .login-card or similar */
+  color: #33FF33;
+  border: 2px solid #33FF33;
+  padding: 0.5rem 1rem; /* Keep existing padding or adjust */
+  border-radius: 0px; /* Sharper corners for retro feel */
+  box-shadow: 0 0 10px #33FF3330; /* Subtle green glow */
+  /* Ensure position and transition styles from JS are not overridden if not needed,
+     or redefine them here if we want to manage all styling via CSS for this element.
+     The JS sets: position, bottom, right, opacity, transition. These are probably fine. */
 }
