@@ -186,14 +186,11 @@ html {
   left: 0; /* Or 5px if toolbar margin applies here too */
   width: 100%; /* Or calc(100% - 10px) if toolbar margin applies */
   height: calc(100% - 40px); /* Adjusted for new toolbar height + margin */
-  background-color: #33691E; /* Darker green base */
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 5px,
-    rgba(102, 187, 106, 0.4) 5px, /* GRASS_GREEN_MEDIUM (#66BB6A) with 0.4 opacity */
-    rgba(102, 187, 106, 0.4) 10px
-  );
+  /* Removed previous background-color and background-image (gradient) */
+  background-image: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: flex-start;
   padding: 1rem;
@@ -202,39 +199,53 @@ html {
   overflow: auto;
 }
 
+#desktop-username-display {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 15px; /* Adjust as needed */
+  font-size: 0.9em; /* Or a specific pixel value that fits the theme */
+  color: #FFFFFF; /* UI_WHITE_TEXT for visibility on the new background image */
+  background-color: rgba(0, 0, 0, 0.3); /* Subtle dark background for readability */
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.7); /* Ensure readability */
+  z-index: 5; /* Below toolbar (10) but above desktop area general content if needed */
+}
+
 .icon {
-  width: 80px; /* Adjust size */
-  height: 80px; /* Adjust size */
+  width: 90px; /* Increased size */
+  height: 90px; /* Increased size */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 2px solid #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT - Icon border */
-  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG - Icon BG */
+  border: 2px solid #FFFFFF; /* White border */
+  background-color: transparent; /* Transparent default background */
   border-radius: 15px; /* More rounded for icons */
   text-align: center;
   cursor: pointer;
   margin-bottom: 1rem; /* Keep or adjust spacing */
-  transition: transform 0.2s, background-color 0.2s; /* Keep existing transitions or simplify */
+  transition: transform 0.2s, filter 0.2s; /* Adjusted transition for filter */
 }
 
 .icon:hover {
   transform: scale(1.1); /* Make it grow a bit */
-  background-color: #66BB6A; /* GRASS_GREEN_MEDIUM on hover */
+  filter: brightness(1.2); /* Generic hover brightness */
   border-color: #FFEE58; /* ACCENT_YELLOW on hover */
 }
 
 .icon-img {
-  font-size: 2.5rem; /* Adjust size of the letter/symbol */
-  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT for icon symbol */
+  font-size: 3rem; /* Increased font size */
+  color: #FFFFFF; /* White color for icon symbol */
   margin-bottom: 0.2rem; /* Space between letter and label */
   pointer-events: none; /* Keep this */
 }
 
 .icon-label {
-  font-size: 0.8em; /* Adjust size as needed with the new font */
-  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
+  font-size: 0.75em; /* Adjusted font size */
+  color: #FFFFFF; /* White color for label */
   font-family: 'Press Start 2P', monospace; /* Added font */
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5); /* Added text shadow */
 }
 
 .login-card input, .login-btn, button { /* General button styling for font */
@@ -546,7 +557,7 @@ html {
 
 /* ============== “Learn to Code” MODAL ============== */
 .modal-hidden {
-  display: none;
+  display: none !important; /* Added !important */
 }
 
 #code-modal {
@@ -560,6 +571,7 @@ html {
   align-items: center;
   justify-content: center;
   z-index: 999;
+  pointer-events: none; /* Add this */
 }
 
 .modal-content {
@@ -632,18 +644,32 @@ html {
   }
 
   .icon {
-    width: 60px; /* Ensure media query icon size is also adjusted if needed */
-    height: 60px;
+    width: 75px; /* Ensure media query icon size is also adjusted if needed */
+    height: 75px; /* Adjusted media query size */
   }
 
   .icon-img {
-    font-size: 1.8rem; /* Adjust media query icon font size */
+    font-size: 2.2rem; /* Adjusted media query icon font size */
   }
 
   .icon-label {
     font-size: 0.7em; /* Adjust media query icon label font size */
+    /* Text shadow will be inherited if needed */
   }
 }
+
+/* nth-child icon background colors */
+#desktop-area .icon:nth-child(1) { background-color: #31A8FF; } /* Blue */
+#desktop-area .icon:nth-child(2) { background-color: #FF7C00; } /* Orange */
+#desktop-area .icon:nth-child(3) { background-color: #FF3366; } /* Pink */
+#desktop-area .icon:nth-child(4) { background-color: #9900FF; } /* Purple */
+#desktop-area .icon:nth-child(5) { background-color: #00C8C8; } /* Teal */
+#desktop-area .icon:nth-child(6) { background-color: #FFD700; } /* Gold/Yellow */
+#desktop-area .icon:nth-child(7) { background-color: #50C878; } /* Emerald Green */
+#desktop-area .icon:nth-child(8) { background-color: #FF69B4; } /* Hot Pink */
+#desktop-area .icon:nth-child(9) { background-color: #40E0D0; } /* Turquoise */
+#desktop-area .icon:nth-child(10) { background-color: #BA55D3; } /* Medium Orchid */
+#desktop-area .icon:nth-child(11) { background-color: #FF8C00; } /* Dark Orange */
 
 .retro-popup {
   background-color: #66BB6A; /* GRASS_GREEN_MEDIUM */

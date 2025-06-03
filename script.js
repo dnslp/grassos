@@ -7,6 +7,11 @@ const modalCloseBtn = document.getElementById('modal-close');
 const modalDescription = document.getElementById('modal-description');
 const modalCssCode = document.getElementById('modal-css-code');
 
+if (codeModal) {
+  codeModal.classList.add('modal-hidden'); // Ensure class is there
+  codeModal.style.pointerEvents = 'none'; // Explicitly set pointer events to none
+}
+
 function playStartupSounds() {
   win95Sound.playbackRate = 0.6; nt4Sound.playbackRate = 0.6;
   win95Sound.currentTime = 0; win95Sound.play();
@@ -34,6 +39,12 @@ loginForm.addEventListener('submit', e => {
     playStartupSounds();
     startClock();
     showWelcomePopup();
+
+    const usernameValue = document.getElementById('username').value;
+    const usernameDisplayElement = document.getElementById('desktop-username-display');
+    if (usernameDisplayElement && usernameValue) {
+      usernameDisplayElement.textContent = `User: ${usernameValue}`;
+    }
   }, 800);
 });
 
@@ -100,6 +111,7 @@ animationIcons.forEach(icon => {
       modalDescription.textContent = desc;
       modalCssCode.textContent = css;
       codeModal.classList.remove('modal-hidden');
+      codeModal.style.pointerEvents = 'auto'; // Enable interaction
     }
   });
 });
@@ -107,7 +119,10 @@ animationIcons.forEach(icon => {
 // Modal Close Logic
 if (modalCloseBtn) {
   modalCloseBtn.addEventListener('click', () => {
-    if (codeModal) codeModal.classList.add('modal-hidden');
+    if (codeModal) {
+      codeModal.classList.add('modal-hidden');
+      codeModal.style.pointerEvents = 'none'; // Disable interaction
+    }
   });
 }
 
@@ -115,6 +130,7 @@ if (codeModal) {
   codeModal.addEventListener('click', (event) => {
     if (event.target === codeModal) { // Clicked on the modal backdrop
       codeModal.classList.add('modal-hidden');
+      codeModal.style.pointerEvents = 'none'; // Disable interaction
     }
   });
 }
