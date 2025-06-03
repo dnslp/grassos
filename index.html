@@ -4,11 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GrassOS Startup</title>
-  <!-- Link to our CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Audio elements for startup sounds -->
+  <!-- Audio for startup -->
   <audio id="win95-sound" src="https://www.winhistory.de/more/winstart/mp3/win95.mp3"></audio>
   <audio id="nt4-sound" src="https://www.winhistory.de/more/winstart/mp3/nt4.mp3"></audio>
 
@@ -28,11 +27,11 @@
       <form id="login-form">
         <label>
           Username<br/>
-          <input type="text" id="username" placeholder="Type your name…" required />
+          <input type="text" id="username" placeholder="Type your name…" required autocomplete="off" />
         </label>
         <label>
-          Password<br/>
-          <input type="password" id="password" placeholder="••••••" required />
+          Password (won’t be saved)<br/>
+          <input type="text" id="password" placeholder="••••••" required autocomplete="off" />
         </label>
         <button type="submit" class="login-btn">Log In</button>
       </form>
@@ -41,62 +40,86 @@
 
   <!-- ======= DESKTOP SCREEN ======= -->
   <div id="desktop-screen">
-    <!-- A top toolbar -->
     <div id="toolbar">
       <div id="start-button"><span>🌱</span> Start</div>
       <div class="clock" id="clock"></div>
     </div>
-
-    <!-- Desktop background: grass + vintage pattern -->
     <div id="desktop-area">
-      <!-- Icons on the desktop -->
-      <div class="icon" id="icon-folder">
-        <div class="icon-img">📁</div>
-        <div class="icon-label">Files</div>
+      <!-- Animation Icons -->
+      <div class="icon animate-icon" id="icon-wiggle" 
+        data-desc="Wiggle: a playful quick back-and-forth rotation." 
+        data-css="@keyframes wiggle {0%{transform:rotate(0);}25%{transform:rotate(10deg);}50%{transform:rotate(-10deg);}75%{transform:rotate(8deg);}100%{transform:rotate(0);}}">
+        <div class="icon-img">🎉</div>
+        <div class="icon-label">Wiggle</div>
       </div>
-      <div class="icon" id="icon-code">
-        <div class="icon-img">💻</div>
-        <div class="icon-label">Learn to Code</div>
+      <div class="icon animate-icon" id="icon-scale"
+        data-desc="Scale: pulsing grow and shrink."
+        data-css="@keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}">
+        <div class="icon-img">📐</div>
+        <div class="icon-label">Scale</div>
       </div>
-      <div class="icon" id="icon-settings">
-        <div class="icon-img">⚙️</div>
-        <div class="icon-label">Settings</div>
+      <div class="icon animate-icon" id="icon-hue"
+        data-desc="Hue Shift: cycles through the color wheel."
+        data-css="@keyframes hueShift {0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}">
+        <div class="icon-img">🌈</div>
+        <div class="icon-label">Hue Shift</div>
+      </div>
+      <div class="icon animate-icon" id="icon-rotate"
+        data-desc="Rotate: spins 360°."
+        data-css="@keyframes rotate360 {0%{transform:rotate(0);}100%{transform:rotate(360deg);}}">
+        <div class="icon-img">🔄</div>
+        <div class="icon-label">Rotate</div>
+      </div>
+      <div class="icon animate-icon" id="icon-skew"
+        data-desc="Skew: gets slanty and straightens out."
+        data-css="@keyframes skew {0%{transform:skewX(0);}40%{transform:skewX(25deg);}80%{transform:skewX(-25deg);}100%{transform:skewX(0);}}">
+        <div class="icon-img">🦀</div>
+        <div class="icon-label">Skew</div>
+      </div>
+      <div class="icon animate-icon" id="icon-shadow"
+        data-desc="Shadow Pulse: the shadow grows and shrinks."
+        data-css="@keyframes shadowPulse {0%{box-shadow:0 4px 16px #0003;}50%{box-shadow:0 10px 40px #2228;}100%{box-shadow:0 4px 16px #0003;}}">
+        <div class="icon-img">💡</div>
+        <div class="icon-label">Shadow Pulse</div>
+      </div>
+      <div class="icon animate-icon" id="icon-border"
+        data-desc="Border Dance: border color and width animate."
+        data-css="@keyframes borderDance {0%{border-color:#7cb342;border-width:2px;}50%{border-color:#ff4081;border-width:8px;}100%{border-color:#7cb342;border-width:2px;}}">
+        <div class="icon-img">🖼️</div>
+        <div class="icon-label">Border Dance</div>
+      </div>
+      <div class="icon animate-icon" id="icon-sparkle"
+        data-desc="Sparkle: flashes in brightness."
+        data-css="@keyframes sparkle {0%,100%{filter:brightness(1);}20%,80%{filter:brightness(2.5);}}">
+        <div class="icon-img">✨</div>
+        <div class="icon-label">Sparkle</div>
+      </div>
+      <div class="icon animate-icon" id="icon-fade"
+        data-desc="Fade: quickly fades out and in."
+        data-css="@keyframes fade {0%{opacity:1;}40%{opacity:0.1;}60%{opacity:0.1;}100%{opacity:1;}}">
+        <div class="icon-img">🌫️</div>
+        <div class="icon-label">Fade</div>
+      </div>
+      <div class="icon animate-icon" id="icon-jelly"
+        data-desc="Jelly: squishes and stretches like Jell-O."
+        data-css="@keyframes jelly {0%,100%{transform:scale(1,1);}30%{transform:scale(2.25,0.75);}40%{transform:scale(0.75,1.25);}50%{transform:scale(2.15,0.85);}65%{transform:scale(0.45,1.05);}75%{transform:scale(1.05,0.95);}85%{transform:scale(0.98,1.02);}}">
+        <div class="icon-img">🍮</div>
+        <div class="icon-label">Jelly</div>
+      </div>
+      <div class="icon animate-icon" id="icon-glitch"
+        data-desc="Glitch: jitters like a glitched screen."
+        data-css="@keyframes glitch {0%{transform:none;}20%{transform:translate(-2px,1px) skewX(5deg);}40%{transform:translate(2px,-2px) skewX(-8deg);}60%{transform:translate(-1px,2px) skewY(3deg);}80%{transform:translate(1px,-1px) skewY(-4deg);}100%{transform:none;}}">
+        <div class="icon-img">👾</div>
+        <div class="icon-label">Glitch</div>
+      </div>
+      <!-- Desktop message for animation descriptions and code -->
+      <div id="desktop-message">
+        <div class="desc"></div>
+        <pre class="css-code"></pre>
       </div>
     </div>
   </div>
 
-  <!-- ======= “Learn to Code” POPUP ======= -->
-  <div id="code-modal" class="modal-hidden">
-    <div class="modal-content">
-      <span id="modal-close">×</span>
-      <h2>Getting Started with HTML, CSS &amp; JavaScript</h2>
-      <p>This is a tiny interactive demo inspired by w3schools. Feel free to copy/paste or modify these snippets.</p>
-      <h3>1. Simple HTML Button</h3>
-      <pre><code>&lt;button onclick="alert('Hello, GrassOS!')"&gt;Click me!&lt;/button&gt;</code></pre>
-      <h3>2. Basic CSS (Change button color on hover)</h3>
-      <pre><code>
-button {
-  background-color: #7cb342; /* grassy green */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-button:hover {
-  background-color: #689f38; /* darker green */
-}
-      </code></pre>
-      <h3>3. JavaScript Snippet (Log to console)</h3>
-      <pre><code>
-&lt;script&gt;
-  console.log('Welcome to GrassOS learning corner!');
-&lt;/script&gt;
-      </code></pre>
-      <p>Try copying these into your own files or live editor and see what happens!</p>
-    </div>
-  </div>
-
-  <!-- Link to our JS -->
   <script src="script.js"></script>
 </body>
 </html>

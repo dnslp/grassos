@@ -1,35 +1,36 @@
-/* ============== GLOBAL RESET ============== */
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body, html {
+
+body,
+html {
   width: 100%;
   height: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden; /* We'll manage scrollbars ourselves */
+font-family: monospace;
+  overflow: hidden;
 }
 
-/* ================= LOGIN SCREEN ================= */
 #login-screen {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    url('https://i.imgur.com/8J3yf4r.png') center/cover no-repeat, /* optional vintage lawn texture */
-    linear-gradient(135deg, #a8e063, #56ab2f); /* vibrant summer greens */
+  background: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png') center/cover no-repeat, linear-gradient(135deg, #a8e063, #56ab2f);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .login-card {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255, 255, 255, 0.95);
   padding: 2rem 3rem;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 320px;
 }
@@ -39,10 +40,11 @@ body, html {
   margin-bottom: 1rem;
   color: #2e7d32;
 }
+
 .grass-text {
   font-family: 'Courier New', Courier, monospace;
   color: #558b2f;
-  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-selection p {
@@ -50,12 +52,14 @@ body, html {
   font-weight: bold;
   color: #33691e;
 }
+
 .avatars {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
+
 .avatar-btn {
   background: #fff;
   border: 2px solid #a5d6a7;
@@ -66,7 +70,9 @@ body, html {
   cursor: pointer;
   transition: transform 0.2s, border-color 0.2s;
 }
-.avatar-btn:hover, .avatar-btn.selected {
+
+.avatar-btn:hover,
+.avatar-btn.selected {
   border-color: #558b2f;
   transform: scale(1.1);
 }
@@ -76,11 +82,13 @@ body, html {
   flex-direction: column;
   gap: 0.75rem;
 }
+
 .login-card label {
   text-align: left;
   color: #33691e;
   font-weight: 500;
 }
+
 .login-card input {
   width: 100%;
   padding: 0.5rem;
@@ -88,6 +96,7 @@ body, html {
   border-radius: 4px;
   font-size: 1rem;
 }
+
 .login-card input:focus {
   outline: none;
   border-color: #66bb6a;
@@ -104,26 +113,24 @@ body, html {
   cursor: pointer;
   transition: background 0.2s;
 }
+
 .login-btn:hover {
   background: #689f38;
 }
 
-/* ================= DESKTOP SCREEN ================= */
 #desktop-screen {
-  display: none; /* hidden until login */
+  display: none;
   width: 100%;
   height: 100%;
-  background: 
-    url('https://i.imgur.com/8J3yf4r.png') center/cover no-repeat, /* optional: same vintage lawn texture */ 
-    #a5d6a7; /* base green */
+  background: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png') center/cover no-repeat, linear-gradient(135deg, #a8e063, #56ab2f);
   position: relative;
   overflow: hidden;
 }
 
-/* Toolbar at top */
 #toolbar {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 40px;
   background: rgba(30, 60, 30, 0.85);
@@ -132,7 +139,9 @@ body, html {
   padding: 0 1rem;
   color: #e8f5e9;
   font-weight: 500;
+  z-index: 10;
 }
+
 #start-button {
   background: #33691e;
   padding: 4px 12px;
@@ -143,72 +152,369 @@ body, html {
   cursor: pointer;
   transition: background 0.2s;
 }
+
 #start-button:hover {
   background: #2e7d32;
 }
+
 .clock {
   margin-left: auto;
   font-family: 'Courier New', Courier, monospace;
 }
 
-/* Desktop area */
+#info-btn {
+  background: #fff;
+  color: #33691e;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  width: 32px;
+  height: 32px;
+  margin-left: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#info-btn:hover {
+  background: #b3e7ae;
+}
+
 #desktop-area {
   position: absolute;
-  top: 40px; left: 0;
+  top: 40px;
+  left: 0;
   width: 100%;
   height: calc(100% - 40px);
-  background: rgba(165, 214, 167, 0.6); /* semi-transparent grass-green overlay */
+  background: rgba(165, 214, 167, 0.6);
   display: flex;
   align-items: flex-start;
   padding: 1rem;
-  gap: 2rem;
+  gap: 1rem;
   flex-wrap: wrap;
   overflow: auto;
 }
 
-/* Icon style */
 .icon {
-  width: 80px;
+  width: 100px;
   text-align: center;
   cursor: pointer;
   margin-bottom: 1.5rem;
-  transition: transform 0.2s;
+  transition: transform 0.2s, filter 0.2s;
 }
+
 .icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
+
 .icon-img {
-  font-size: 2rem;
+  font-size: 4rem;
   margin-bottom: 0.4rem;
+  pointer-events: none;
 }
+
 .icon-label {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #2e7d32;
 }
 
-/* Simple “bounce” animation on click */
-@keyframes bounce {
-  0%   { transform: translateY(0); }
-  30%  { transform: translateY(-10px); }
-  60%  { transform: translateY(0); }
-  100% { transform: translateY(0); }
+/* Animation classes */
+.wiggle-anim {
+  animation: wiggle 0.6s;
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotate(0);
+  }
+
+  25% {
+    transform: rotate(10deg);
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  75% {
+    transform: rotate(8deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+
+.pulse-anim {
+  animation: pulse 0.8s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.hue-anim {
+  animation: hueShift 2s;
+}
+
+@keyframes hueShift {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.rotate-anim {
+  animation: rotate360 0.9s;
+}
+
+@keyframes rotate360 {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.skew-anim {
+  animation: skew 0.7s;
+}
+
+@keyframes skew {
+  0% {
+    transform: skewX(0);
+  }
+
+  40% {
+    transform: skewX(25deg);
+  }
+
+  80% {
+    transform: skewX(-25deg);
+  }
+
+  100% {
+    transform: skewX(0);
+  }
+}
+
+.shadow-anim {
+  animation: shadowPulse 1.1s;
+}
+
+@keyframes shadowPulse {
+  0% {
+    box-shadow: 0 4px 16px #0003;
+  }
+
+  50% {
+    box-shadow: 0 10px 40px #2228;
+  }
+
+  100% {
+    box-shadow: 0 4px 16px #0003;
+  }
+}
+
+.border-anim {
+  animation: borderDance 1s;
+}
+
+@keyframes borderDance {
+  0% {
+    border-color: #7cb342;
+    border-width: 2px;
+  }
+
+  50% {
+    border-color: #ff4081;
+    border-width: 8px;
+  }
+
+  100% {
+    border-color: #7cb342;
+    border-width: 2px;
+  }
+}
+
+.sparkle-anim {
+  animation: sparkle 1s;
+}
+
+@keyframes sparkle {
+
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  20%,
+  80% {
+    filter: brightness(2.5);
+  }
+}
+
+.fade-anim {
+  animation: fade 0.8s;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.1;
+  }
+
+  60% {
+    opacity: 0.1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.jelly-anim {
+  animation: jelly 1s;
+}
+
+@keyframes jelly {
+
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+
+  85% {
+    transform: scale(0.98, 1.02);
+  }
+}
+
+.glitch-anim {
+  animation: glitch 0.7s;
+}
+
+@keyframes glitch {
+  0% {
+    transform: none;
+  }
+
+  20% {
+    transform: translate(-2px, 1px) skewX(5deg);
+  }
+
+  40% {
+    transform: translate(2px, -2px) skewX(-8deg);
+  }
+
+  60% {
+    transform: translate(-1px, 2px) skewY(3deg);
+  }
+
+  80% {
+    transform: translate(1px, -1px) skewY(-4deg);
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+/* Special effects for borderDance and shadowPulse */
+.border-anim {
+  border: 4px solid #7cb342;
+}
+
+.shadow-anim {
+  box-shadow: 0 4px 16px #0003;
+}
+
+/* Desktop message */
+#desktop-message {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(48, 63, 159, 0.92);
+  color: #fff;
+  padding: 0.8rem 1rem;
+  border-radius: 4px;
+  font-size: 2rem;
+  max-width: none;
+  min-width: 160px;
+  min-height: 40px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+  z-index: 100;
+}
+
+#desktop-message .desc {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+#desktop-message .css-code {
+  font-size: 1.2rem;
+  background: rgba(0, 0, 0, 0.13);
+  border-radius: 3px;
+  padding: 3px 5px;
+  margin: 0;
 }
 
 /* ============== “Learn to Code” MODAL ============== */
 .modal-hidden {
   display: none;
 }
+
 #code-modal {
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
 }
+
 .modal-content {
   background: #f1f8e9;
   padding: 2rem;
@@ -216,20 +522,24 @@ body, html {
   width: 500px;
   max-width: 90%;
   position: relative;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
   max-height: 80%;
 }
+
 #modal-close {
   position: absolute;
-  top: 10px; right: 12px;
+  top: 10px;
+  right: 12px;
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 .modal-content h2 {
   color: #33691e;
   margin-bottom: 1rem;
 }
+
 .modal-content pre {
   background: #e8f5e9;
   padding: 0.75rem;
@@ -237,9 +547,34 @@ body, html {
   overflow-x: auto;
   margin-bottom: 1rem;
 }
+
 .modal-content code {
   font-family: Consolas, 'Courier New', monospace;
-  font-size: 0.9rem;
+  font-size: 0.97rem;
   display: block;
   white-space: pre-wrap;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  #toolbar {
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .icon {
+    width: 60px;
+  }
+
+  .icon-img {
+    font-size: 1.5rem;
+  }
+
+  .icon-label {
+    font-size: 0.8rem;
+  }
 }
