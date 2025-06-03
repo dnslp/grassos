@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GrassOS Startup</title>
+  <!-- Link to our CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Audio elements for startup sounds -->
+  <audio id="win95-sound" src="https://www.winhistory.de/more/winstart/mp3/win95.mp3"></audio>
+  <audio id="nt4-sound" src="https://www.winhistory.de/more/winstart/mp3/nt4.mp3"></audio>
+
+  <!-- ======= LOGIN SCREEN ======= -->
+  <div id="login-screen">
+    <div class="login-card">
+      <h1>Welcome to <span class="grass-text">GrassOS</span></h1>
+      <div class="avatar-selection">
+        <p>Select an avatar:</p>
+        <div class="avatars">
+          <button class="avatar-btn" data-avatar="🐸">🐸</button>
+          <button class="avatar-btn" data-avatar="🐝">🐝</button>
+          <button class="avatar-btn" data-avatar="🐢">🐢</button>
+          <button class="avatar-btn" data-avatar="🦎">🦎</button>
+        </div>
+      </div>
+      <form id="login-form">
+        <label>
+          Username<br/>
+          <input type="text" id="username" placeholder="Type your name…" required />
+        </label>
+        <label>
+          Password<br/>
+          <input type="password" id="password" placeholder="••••••" required />
+        </label>
+        <button type="submit" class="login-btn">Log In</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======= DESKTOP SCREEN ======= -->
+  <div id="desktop-screen">
+    <!-- A top toolbar -->
+    <div id="toolbar">
+      <div id="start-button"><span>🌱</span> Start</div>
+      <div class="clock" id="clock"></div>
+    </div>
+
+    <!-- Desktop background: grass + vintage pattern -->
+    <div id="desktop-area">
+      <!-- Icons on the desktop -->
+      <div class="icon" id="icon-folder">
+        <div class="icon-img">📁</div>
+        <div class="icon-label">Files</div>
+      </div>
+      <div class="icon" id="icon-code">
+        <div class="icon-img">💻</div>
+        <div class="icon-label">Learn to Code</div>
+      </div>
+      <div class="icon" id="icon-settings">
+        <div class="icon-img">⚙️</div>
+        <div class="icon-label">Settings</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= “Learn to Code” POPUP ======= -->
+  <div id="code-modal" class="modal-hidden">
+    <div class="modal-content">
+      <span id="modal-close">×</span>
+      <h2>Getting Started with HTML, CSS &amp; JavaScript</h2>
+      <p>This is a tiny interactive demo inspired by w3schools. Feel free to copy/paste or modify these snippets.</p>
+      <h3>1. Simple HTML Button</h3>
+      <pre><code>&lt;button onclick="alert('Hello, GrassOS!')"&gt;Click me!&lt;/button&gt;</code></pre>
+      <h3>2. Basic CSS (Change button color on hover)</h3>
+      <pre><code>
+button {
+  background-color: #7cb342; /* grassy green */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #689f38; /* darker green */
+}
+      </code></pre>
+      <h3>3. JavaScript Snippet (Log to console)</h3>
+      <pre><code>
+&lt;script&gt;
+  console.log('Welcome to GrassOS learning corner!');
+&lt;/script&gt;
+      </code></pre>
+      <p>Try copying these into your own files or live editor and see what happens!</p>
+    </div>
+  </div>
+
+  <!-- Link to our JS -->
+  <script src="script.js"></script>
+</body>
+</html>
