@@ -156,6 +156,59 @@ html {
   transform: scale(1.05); /* Added transform */
 }
 
+/* Dropdown Styles */
+.dropdown-container {
+  position: relative; /* For positioning the menu */
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.8em; /* Smaller text for speed control */
+}
+
+#speed-control-trigger {
+  cursor: pointer;
+  padding: 3px 6px;
+  background-color: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border-radius: 5px;
+  border: 1px solid #FFEE58; /* ACCENT_YELLOW */
+  transition: background-color 0.2s;
+}
+
+#speed-control-trigger:hover {
+  background-color: #F06292; /* ACCENT_PINK */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the trigger */
+  left: 0;
+  background-color: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  border: 2px solid #FFEE58; /* ACCENT_YELLOW */
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 0 0;
+  min-width: 100px;
+  z-index: 1000; /* Ensure it's above other toolbar items if needed */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.speed-menu-hidden {
+  display: none !important; /* Hide by default */
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-menu li:hover {
+  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
+}
+
 .clock {
   margin-left: auto;
   font-family: 'Press Start 2P', monospace; /* Changed font */
@@ -558,6 +611,11 @@ html {
 /* ============== “Learn to Code” MODAL ============== */
 .modal-hidden {
   display: none !important; /* Added !important */
+}
+
+.modal-fading-out {
+  opacity: 0 !important; /* Use !important to ensure override during fade */
+  transition: opacity 0.5s ease-out;
 }
 
 #code-modal {

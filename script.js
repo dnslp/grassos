@@ -6,6 +6,13 @@ const codeModal = document.getElementById('code-modal');
 const modalCloseBtn = document.getElementById('modal-close');
 const modalDescription = document.getElementById('modal-description');
 const modalCssCode = document.getElementById('modal-css-code');
+let modalFadeOutTimer = null;
+
+// Speed control elements
+let currentPlaybackSpeed = 1.0;
+const speedControlTrigger = document.getElementById('speed-control-trigger');
+const speedMenu = document.getElementById('speed-menu');
+const startButton = document.getElementById('start-button'); // Get start button
 
 if (codeModal) {
   codeModal.classList.add('modal-hidden'); // Ensure class is there
@@ -13,9 +20,24 @@ if (codeModal) {
 }
 
 function playStartupSounds() {
-  win95Sound.playbackRate = 0.6; nt4Sound.playbackRate = 0.6;
-  win95Sound.currentTime = 0; win95Sound.play();
-  win95Sound.addEventListener('ended', () => { nt4Sound.currentTime = 0; nt4Sound.play(); }, { once: true });
+  // Ensure audio elements are reset and playbackRate is set
+  win95Sound.currentTime = 0;
+  win95Sound.playbackRate = currentPlaybackSpeed;
+  win95Sound.play();
+
+  nt4Sound.currentTime = 0; // Reset just in case
+  nt4Sound.playbackRate = currentPlaybackSpeed;
+
+  // Original logic for sequential play:
+  win95Sound.removeEventListener('ended', playNt4SoundAfterWin95); // Remove previous listener if any
+  win95Sound.addEventListener('ended', playNt4SoundAfterWin95, { once: true });
+}
+
+// Helper function to avoid issues with anonymous functions in event listeners
+function playNt4SoundAfterWin95() {
+  nt4Sound.currentTime = 0; // Already set, but good practice
+  nt4Sound.playbackRate = currentPlaybackSpeed; // Ensure rate is set again if needed
+  nt4Sound.play();
 }
 
 const loginScreen = document.getElementById('login-screen');
@@ -104,24 +126,61 @@ animationIcons.forEach(icon => {
     }
     const desc = icon.dataset.desc || '';
     const css = icon.dataset.css || '';
-    showDesktopMessage(desc, css);
+    showDesktopMessage(desc, css); // This is the small dialog, appears immediately
 
-    // Populate and show the code modal
-    if (codeModal) {
-      modalDescription.textContent = desc;
-      modalCssCode.textContent = css;
-      codeModal.classList.remove('modal-hidden');
-      codeModal.style.pointerEvents = 'auto'; // Enable interaction
+    // Clear any existing fade-out timer if another icon was clicked quickly
+    if (modalFadeOutTimer) {
+      clearTimeout(modalFadeOutTimer);
+      modalFadeOutTimer = null;
     }
+    // If modal is already visible (e.g. from a previous quick click), hide it first without animation
+    if (codeModal && !codeModal.classList.contains('modal-hidden')) {
+      codeModal.classList.add('modal-hidden');
+      codeModal.style.pointerEvents = 'none';
+      codeModal.classList.remove('modal-fading-out'); // Remove any lingering fade class
+      codeModal.style.opacity = '1'; // Reset opacity
+    }
+
+    // Delayed appearance for the main code modal
+    setTimeout(() => {
+      if (codeModal) {
+        modalDescription.textContent = desc;
+        modalCssCode.textContent = css;
+        codeModal.classList.remove('modal-hidden');
+        codeModal.classList.remove('modal-fading-out'); // Ensure not fading if re-opened quickly
+        codeModal.style.opacity = '1'; // Reset opacity if it was faded
+        codeModal.style.pointerEvents = 'auto';
+
+        // Start auto-fade-out timer
+        modalFadeOutTimer = setTimeout(() => {
+          if (codeModal && !codeModal.classList.contains('modal-hidden')) { // Check if still visible
+            codeModal.classList.add('modal-fading-out');
+            // After fade animation, properly hide it
+            setTimeout(() => {
+              codeModal.classList.add('modal-hidden');
+              codeModal.style.pointerEvents = 'none';
+              // No need to remove modal-fading-out here, it's removed when modal is shown again
+            }, 500); // Must match CSS transition duration
+          }
+          modalFadeOutTimer = null;
+        }, 5000); // 5 seconds to start fading
+      }
+    }, 1000); // 1 second delay to show modal
   });
 });
 
 // Modal Close Logic
 if (modalCloseBtn) {
   modalCloseBtn.addEventListener('click', () => {
+    if (modalFadeOutTimer) {
+      clearTimeout(modalFadeOutTimer);
+      modalFadeOutTimer = null;
+    }
     if (codeModal) {
       codeModal.classList.add('modal-hidden');
-      codeModal.style.pointerEvents = 'none'; // Disable interaction
+      codeModal.style.pointerEvents = 'none';
+      codeModal.classList.remove('modal-fading-out'); // Reset fade class
+      codeModal.style.opacity = '1'; // Reset opacity for next show
     }
   });
 }
@@ -129,8 +188,14 @@ if (modalCloseBtn) {
 if (codeModal) {
   codeModal.addEventListener('click', (event) => {
     if (event.target === codeModal) { // Clicked on the modal backdrop
+      if (modalFadeOutTimer) {
+        clearTimeout(modalFadeOutTimer);
+        modalFadeOutTimer = null;
+      }
       codeModal.classList.add('modal-hidden');
-      codeModal.style.pointerEvents = 'none'; // Disable interaction
+      codeModal.style.pointerEvents = 'none';
+      codeModal.classList.remove('modal-fading-out'); // Reset fade class
+      codeModal.style.opacity = '1'; // Reset opacity for next show
     }
   });
 }
@@ -150,3 +215,40 @@ document.getElementById('desktop-area').addEventListener('click', e => {
   if (e.target.classList.contains('icon') || e.target.classList.contains('icon-img')) return;
   showDesktopMessage('Click an icon to try out a CSS animation!', '');
 });
+
+// Dropdown Toggle Logic
+if (speedControlTrigger && speedMenu) {
+  speedControlTrigger.addEventListener('click', (event) => {
+    event.stopPropagation(); // Prevent click from immediately closing if we add window click listener
+    speedMenu.classList.toggle('speed-menu-hidden');
+  });
+
+  // Optional: Close menu if clicked outside
+  window.addEventListener('click', () => {
+    if (!speedMenu.classList.contains('speed-menu-hidden')) {
+      speedMenu.classList.add('speed-menu-hidden');
+    }
+  });
+}
+
+// Speed Selection Logic
+if (speedMenu) {
+  const speedOptions = speedMenu.querySelectorAll('li[data-speed]');
+  speedOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      currentPlaybackSpeed = parseFloat(option.dataset.speed);
+      if (speedControlTrigger) {
+        const speedText = option.textContent;
+        speedControlTrigger.textContent = `Speed: ${speedText} ▾`;
+      }
+      speedMenu.classList.add('speed-menu-hidden');
+    });
+  });
+}
+
+// Event Listener for Start Button
+if (startButton) {
+  startButton.addEventListener('click', () => {
+    playStartupSounds(); // Call the existing function
+  });
+}
