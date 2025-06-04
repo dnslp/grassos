@@ -1,23 +1,16 @@
 const win95Sound = document.getElementById('win95-sound');
 const nt4Sound = document.getElementById('nt4-sound');
 
-// Modal Elements
-const codeModal = document.getElementById('code-modal');
-const modalCloseBtn = document.getElementById('modal-close');
-const modalDescription = document.getElementById('modal-description');
-const modalCssCode = document.getElementById('modal-css-code');
-let modalFadeOutTimer = null;
-
 // Speed control elements
 let currentPlaybackSpeed = 1.0;
 const speedControlTrigger = document.getElementById('speed-control-trigger');
 const speedMenu = document.getElementById('speed-menu');
 const startButton = document.getElementById('start-button'); // Get start button
 
-if (codeModal) {
-  codeModal.classList.add('modal-hidden'); // Ensure class is there
-  codeModal.style.pointerEvents = 'none'; // Explicitly set pointer events to none
-}
+// State variables for repeating icon animations
+let activeIconIntervalId = null;
+let currentlyAnimatingIconElement = null;
+let currentAnimationClass = ''; // To easily remove the correct class
 
 function playStartupSounds() {
   // Ensure audio elements are reset and playbackRate is set
@@ -112,93 +105,68 @@ const animationMap = {
   "icon-sparkle": { cls: 'sparkle-anim', dur: 1000 },
   "icon-fade": { cls: 'fade-anim', dur: 800 },
   "icon-jelly": { cls: 'jelly-anim', dur: 1000 },
-  "icon-glitch": { cls: 'glitch-anim', dur: 700 }
+  "icon-glitch": { cls: 'glitch-anim', dur: 700 },
+  "icon-tada": { cls: 'tada-anim', dur: 1000 },
+  "icon-swing": { cls: 'swing-anim', dur: 1000 },
+  "icon-rubberBand": { cls: 'rubberBand-anim', dur: 1000 },
+  "icon-heartBeat": { cls: 'heartBeat-anim', dur: 1300 },
+  "icon-customZoom": { cls: 'customZoomEffect-anim', dur: 1000 }
 };
 
 const animationIcons = document.querySelectorAll('.animate-icon');
 animationIcons.forEach(icon => {
   icon.addEventListener('click', e => {
-    const id = icon.id;
-    const anim = animationMap[id];
-    if (anim) {
-      icon.classList.add(anim.cls);
-      setTimeout(() => icon.classList.remove(anim.cls), anim.dur);
-    }
-    const desc = icon.dataset.desc || '';
-    const css = icon.dataset.css || '';
-    showDesktopMessage(desc, css); // This is the small dialog, appears immediately
+    const clickedIconEl = e.currentTarget; // Use currentTarget for the element listener is attached to
+    const iconId = clickedIconEl.id;
+    const animData = animationMap[iconId];
 
-    // Clear any existing fade-out timer if another icon was clicked quickly
-    if (modalFadeOutTimer) {
-      clearTimeout(modalFadeOutTimer);
-      modalFadeOutTimer = null;
-    }
-    // If modal is already visible (e.g. from a previous quick click), hide it first without animation
-    if (codeModal && !codeModal.classList.contains('modal-hidden')) {
-      codeModal.classList.add('modal-hidden');
-      codeModal.style.pointerEvents = 'none';
-      codeModal.classList.remove('modal-fading-out'); // Remove any lingering fade class
-      codeModal.style.opacity = '1'; // Reset opacity
-    }
+    if (!animData) return; // Should not happen if map is correct
 
-    // Delayed appearance for the main code modal
-    setTimeout(() => {
-      if (codeModal) {
-        modalDescription.textContent = desc;
-        modalCssCode.textContent = css;
-        codeModal.classList.remove('modal-hidden');
-        codeModal.classList.remove('modal-fading-out'); // Ensure not fading if re-opened quickly
-        codeModal.style.opacity = '1'; // Reset opacity if it was faded
-        codeModal.style.pointerEvents = 'auto';
+    const newAnimationClass = animData.cls;
+    const animDuration = animData.dur;
 
-        // Start auto-fade-out timer
-        modalFadeOutTimer = setTimeout(() => {
-          if (codeModal && !codeModal.classList.contains('modal-hidden')) { // Check if still visible
-            codeModal.classList.add('modal-fading-out');
-            // After fade animation, properly hide it
-            setTimeout(() => {
-              codeModal.classList.add('modal-hidden');
-              codeModal.style.pointerEvents = 'none';
-              // No need to remove modal-fading-out here, it's removed when modal is shown again
-            }, 500); // Must match CSS transition duration
-          }
-          modalFadeOutTimer = null;
-        }, 5000); // 5 seconds to start fading
+    // Stop any currently playing animation
+    if (activeIconIntervalId) {
+      clearInterval(activeIconIntervalId);
+      if (currentlyAnimatingIconElement && currentAnimationClass) {
+        currentlyAnimatingIconElement.classList.remove(currentAnimationClass);
       }
-    }, 1000); // 1 second delay to show modal
+    }
+
+    // If the clicked icon was the one already animating, toggle it off and stop
+    if (currentlyAnimatingIconElement === clickedIconEl) {
+      activeIconIntervalId = null;
+      currentlyAnimatingIconElement = null;
+      currentAnimationClass = '';
+      // Display system message even when toggling off (optional, but consistent)
+      const descOff = clickedIconEl.dataset.desc || '';
+      const cssOff = clickedIconEl.dataset.css || '';
+      showDesktopMessage(`Stopped: ${descOff}`, cssOff);
+      return;
+    }
+
+    // Start new animation for the clicked icon
+    currentlyAnimatingIconElement = clickedIconEl;
+    currentAnimationClass = newAnimationClass;
+
+    const triggerAnimationCycle = () => {
+      // Remove class to allow re-triggering animation
+      clickedIconEl.classList.remove(newAnimationClass);
+      // Short timeout to ensure class removal is processed for reflow
+      setTimeout(() => {
+        clickedIconEl.classList.add(newAnimationClass);
+      }, 20); // Small delay like 20ms
+    };
+
+    triggerAnimationCycle(); // Initial animation trigger
+    activeIconIntervalId = setInterval(triggerAnimationCycle, animDuration + 500);
+
+    // Display system message
+    const descOn = clickedIconEl.dataset.desc || '';
+    const cssOn = clickedIconEl.dataset.css || '';
+    showDesktopMessage(descOn, cssOn);
   });
 });
-
-// Modal Close Logic
-if (modalCloseBtn) {
-  modalCloseBtn.addEventListener('click', () => {
-    if (modalFadeOutTimer) {
-      clearTimeout(modalFadeOutTimer);
-      modalFadeOutTimer = null;
-    }
-    if (codeModal) {
-      codeModal.classList.add('modal-hidden');
-      codeModal.style.pointerEvents = 'none';
-      codeModal.classList.remove('modal-fading-out'); // Reset fade class
-      codeModal.style.opacity = '1'; // Reset opacity for next show
-    }
-  });
-}
-
-if (codeModal) {
-  codeModal.addEventListener('click', (event) => {
-    if (event.target === codeModal) { // Clicked on the modal backdrop
-      if (modalFadeOutTimer) {
-        clearTimeout(modalFadeOutTimer);
-        modalFadeOutTimer = null;
-      }
-      codeModal.classList.add('modal-hidden');
-      codeModal.style.pointerEvents = 'none';
-      codeModal.classList.remove('modal-fading-out'); // Reset fade class
-      codeModal.style.opacity = '1'; // Reset opacity for next show
-    }
-  });
-}
 
 /* Desktop message logic */
 function showDesktopMessage(text, cssCode) {

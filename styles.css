@@ -306,6 +306,9 @@ html {
 }
 
 /* Animation classes */
+/* Ensure all animation classes have a base animation duration for JS to use if needed,
+   though the JS `animationMap` dur property is the primary source for timing.
+   The keyframes themselves should define one iteration of the animation. */
 .wiggle-anim {
   animation: wiggle 0.6s;
 }
@@ -553,6 +556,52 @@ html {
   box-shadow: 0 4px 16px #0003;
 }
 
+@keyframes tada {
+  from { transform: scale3d(1, 1, 1); }
+  10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
+  30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
+  40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.tada-anim { animation-name: tada; animation-duration: 1s; }
+
+@keyframes swing {
+  20% { transform: rotate3d(0, 0, 1, 15deg); }
+  40% { transform: rotate3d(0, 0, 1, -10deg); }
+  60% { transform: rotate3d(0, 0, 1, 5deg); }
+  80% { transform: rotate3d(0, 0, 1, -5deg); }
+  to { transform: rotate3d(0, 0, 1, 0deg); }
+}
+.swing-anim { animation-name: swing; transform-origin: top center; animation-duration: 1s; }
+
+@keyframes rubberBand {
+  from { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.rubberBand-anim { animation-name: rubberBand; animation-duration: 1s; }
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+.heartBeat-anim { animation-name: heartBeat; animation-timing-function: ease-in-out; animation-duration: 1.3s; }
+
+@keyframes customZoomEffect {
+  0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+  70% { opacity: 1; transform: scale(1.1) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.customZoomEffect-anim { animation-name: customZoomEffect; animation-duration: 1s; }
+
+
 /* Desktop message */
 #desktop-message {
   position: absolute; /* Keep absolute for positioning on screen */
@@ -608,87 +657,7 @@ html {
   margin: 0;
 }
 
-/* ============== “Learn to Code” MODAL ============== */
-.modal-hidden {
-  display: none !important; /* Added !important */
-}
-
-.modal-fading-out {
-  opacity: 0 !important; /* Use !important to ensure override during fade */
-  transition: opacity 0.5s ease-out;
-}
-
-#code-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  pointer-events: none; /* Add this */
-}
-
-.modal-content {
-  background: #66BB6A; /* GRASS_GREEN_MEDIUM */
-  padding: 2rem;
-  border-radius: 15px; /* More bubbly */
-  width: 500px;
-  max-width: 90%;
-  position: relative;
-  box-shadow: 0 10px 20px #21212180; /* UI_TEXT_DARK_TRANSPARENT (assuming) */
-  overflow-y: auto;
-  max-height: 80%;
-  border: 3px solid #F06292; /* ACCENT_PINK */
-  color: #FFFFFF; /* UI_WHITE_TEXT */
-}
-
-#modal-close {
-  position: absolute;
-  top: 5px; /* Adjusted */
-  right: 10px; /* Adjusted */
-  font-size: 1.8rem; /* Larger 'X' */
-  font-weight: bold; /* Added font-weight */
-  cursor: pointer;
-  color: #FFEE58; /* ACCENT_YELLOW */
-  padding: 2px 5px; /* Added padding */
-  line-height: 1; /* Added line-height */
-}
-
-.modal-content h2 { /* "Animation Details" title */
-  color: #FFFFFF; /* UI_WHITE_TEXT */
-  margin-bottom: 1rem;
-}
-
-.modal-content p#modal-description {
-  color: #FFFFFF; /* UI_WHITE_TEXT */
-  margin-bottom: 0.8rem; /* Added margin */
-}
-
-.modal-content h3 { /* "CSS Code:" subtitle */
-  color: #FFFFFF; /* UI_WHITE_TEXT */
-  margin-bottom: 0.5rem; /* Added margin */
-}
-
-.modal-content pre { /* Container for code */
-  background: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
-  padding: 0.75rem;
-  border-radius: 8px; /* Rounded corners */
-  overflow-x: auto;
-  margin-bottom: 1rem;
-  border: 1px solid #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
-}
-
-.modal-content code#modal-css-code {
-  font-family: 'Press Start 2P', monospace; /* Ensure this uses the pixel font too */
-  color: #212121; /* UI_TEXT_DARK */
-  font-size: 0.9rem; /* Adjusted size for pixel font */
-  display: block;
-  white-space: pre-wrap;
-}
+/* ============== “Learn to Code” MODAL (REMOVED) ============== */
 
 @media (max-width: 480px) {
   .login-card {
@@ -728,6 +697,11 @@ html {
 #desktop-area .icon:nth-child(9) { background-color: #40E0D0; } /* Turquoise */
 #desktop-area .icon:nth-child(10) { background-color: #BA55D3; } /* Medium Orchid */
 #desktop-area .icon:nth-child(11) { background-color: #FF8C00; } /* Dark Orange */
+#desktop-area .icon:nth-child(12) { background-color: #20B2AA; } /* Light Sea Green */
+#desktop-area .icon:nth-child(13) { background-color: #FF4500; } /* OrangeRed */
+#desktop-area .icon:nth-child(14) { background-color: #DA70D6; } /* Orchid */
+#desktop-area .icon:nth-child(15) { background-color: #32CD32; } /* LimeGreen */
+#desktop-area .icon:nth-child(16) { background-color: #4682B4; } /* SteelBlue */
 
 .retro-popup {
   background-color: #66BB6A; /* GRASS_GREEN_MEDIUM */
