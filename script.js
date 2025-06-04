@@ -13,12 +13,12 @@ let currentlyAnimatingIconElement = null;
 let currentAnimationClass = ''; // To easily remove the correct class
 
 // Micro-Paint Application Variables
-const artistIcon = document.getElementById('icon-artist');
-const paintModal = document.getElementById('paint-modal');
-const paintModalCloseBtn = document.getElementById('paint-modal-close');
-const paintCanvas = document.getElementById('paint-canvas');
-const paintToolbar = document.getElementById('paint-toolbar'); // For attaching delegated listeners or getting controls
-const clearCanvasBtn = document.getElementById('clear-canvas-button');
+let artistIcon = null;
+let paintModal = null;
+let paintModalCloseBtn = null;
+let paintCanvas = null;
+let paintToolbar = null;
+let clearCanvasBtn = null;
 
 let paintCtx = null;
 let isPainting = false;
@@ -246,7 +246,18 @@ if (startButton) {
 
 // Micro-Paint Application Functions
 function initializePaintApp() {
-  if (!paintCanvas) return; // Ensure canvas exists
+  // Assign to global lets so other functions can use them
+  artistIcon = document.getElementById('icon-artist');
+  paintModal = document.getElementById('paint-modal');
+  paintModalCloseBtn = document.getElementById('paint-modal-close');
+  paintCanvas = document.getElementById('paint-canvas');
+  paintToolbar = document.getElementById('paint-toolbar');
+  clearCanvasBtn = document.getElementById('clear-canvas-button');
+
+  if (!paintCanvas) { // Critical check after attempting to get element
+      // console.error("Paint canvas not found during init!"); // Debugging thought
+      return;
+  }
   paintCtx = paintCanvas.getContext('2d');
 
   // Set initial canvas size dynamically when modal opens (see openPaintModal)
@@ -302,31 +313,24 @@ function initializePaintApp() {
   }
 
   // Modal Open/Close
-  if (artistIcon && paintModal) {
+  if (artistIcon && paintModal) { // Keep this check
     artistIcon.addEventListener('click', () => {
-          // Provide one-shot animation feedback
-          const feedbackAnimClass = 'pulse-anim'; // Re-use existing pulse animation
-          const feedbackAnimData = animationMap['icon-scale']; // 'icon-scale' uses 'pulse-anim'
+      // Simple visual debug: Change artistIcon's border color to confirm click listener fires
+      // This is a temporary debug step.
+      if (artistIcon) { // Check artistIcon again just in case of closure issues (unlikely here)
+        artistIcon.style.borderColor = 'red'; // Temporary visual feedback
+        setTimeout(() => {
+          artistIcon.style.borderColor = ''; // Reset after a bit
+        }, 1000);
+      }
 
-          if (feedbackAnimData && feedbackAnimData.cls === feedbackAnimClass) {
-            artistIcon.classList.add(feedbackAnimClass);
-            setTimeout(() => {
-              artistIcon.classList.remove(feedbackAnimClass);
-            }, feedbackAnimData.dur); // Use duration from animationMap
-          } else {
-            // Fallback if pulse-anim or its data is not found as expected
-            artistIcon.classList.add('pulse-anim'); // Apply class directly
-             setTimeout(() => {
-               artistIcon.classList.remove('pulse-anim');
-             }, 600); // Default duration
-          }
-
-          const desc = artistIcon.dataset.desc || '';
-          const css = artistIcon.dataset.css || ''; // This was a placeholder, might be empty
-          showDesktopMessage(desc, css); // Show system message for artist icon
-
-          openPaintModal();
-        });
+      // Directly call openPaintModal without other logic for now
+      openPaintModal();
+    });
+  } else {
+    // If we reach here, it means artistIcon or paintModal was null during initialization.
+    // This would be a critical issue. For debugging, we'd want to know.
+    // (No direct way to alert user, but this indicates a setup failure)
   }
   if (paintModalCloseBtn && paintModal) {
     paintModalCloseBtn.addEventListener('click', closePaintModal);
