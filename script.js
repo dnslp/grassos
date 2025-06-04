@@ -96,17 +96,23 @@ function startClock() {
 function showWelcomePopup() {
   const popup = document.createElement('div');
   popup.textContent = `Hello, ${document.getElementById('username').value}!`;
+<<<<<<< HEAD
   popup.className = 'welcome-popup retro-popup'; // Added a class
   popup.style.position = 'fixed'; popup.style.bottom = '20px'; popup.style.right = '20px';
   // popup.style.background = '#33691e'; // Remove this
   // popup.style.color = '#fff'; // Remove this
   popup.style.padding = '0.5rem 1rem';
   popup.style.borderRadius = '4px'; popup.style.boxShadow = '0 5px 10px rgba(0,0,0,0.3)';
+=======
+  popup.style.position = 'fixed'; popup.style.top = '20px'; popup.style.right = '20px';
+  popup.style.background = '#33691e'; popup.style.color = '#fff'; popup.style.padding = '0.5rem 1rem';
+  popup.style.borderRadius = '8px'; popup.style.boxShadow = '0 5px 10px rgba(0,0,0,0.3)';
+>>>>>>> main
   popup.style.opacity = '0'; popup.style.transition = 'opacity 0.5s';
   document.body.appendChild(popup);
   setTimeout(() => { popup.style.opacity = '1'; }, 50);
-  setTimeout(() => { popup.style.opacity = '0'; }, 2500);
-  setTimeout(() => { if (popup.parentElement) popup.parentElement.removeChild(popup); }, 3000);
+  setTimeout(() => { popup.style.opacity = '0'; }, 20500);
+  setTimeout(() => { if (popup.parentElement) popup.parentElement.removeChild(popup); }, 30000);
 }
 
 /* Animation icon logic */
