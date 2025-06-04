@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
   margin: 0;
@@ -10,8 +10,9 @@ body,
 html {
   width: 100%;
   height: 100%;
-font-family: monospace;
+  font-family: 'Press Start 2P', monospace; /* Changed font */
   overflow: hidden;
+  color: #212121; /* UI_TEXT_DARK */
 }
 
 #login-screen {
@@ -20,62 +21,38 @@ font-family: monospace;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png') center/cover no-repeat, linear-gradient(135deg, #a8e063, #56ab2f);
+  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  color: #212121; /* UI_TEXT_DARK */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem 3rem;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  padding: 1.5rem 2rem; /* Adjusted padding */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 15px #FFEE5880; /* ACCENT_YELLOW_TRANSPARENT */
   text-align: center;
   width: 320px;
+  border: 3px solid #FFEE58; /* ACCENT_YELLOW */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
 }
 
 .login-card h1 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #2e7d32;
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  font-family: 'Press Start 2P', monospace; /* Added font */
 }
 
 .grass-text {
-  font-family: 'Courier New', Courier, monospace;
-  color: #558b2f;
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  font-family: 'Press Start 2P', monospace; /* Changed font */
+  color: #FFEE58; /* ACCENT_YELLOW */
+  text-shadow: 1px 1px 0px #21212160; /* UI_TEXT_DARK_TRANSPARENT */
 }
 
-.avatar-selection p {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #33691e;
-}
-
-.avatars {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.avatar-btn {
-  background: #fff;
-  border: 2px solid #a5d6a7;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
-}
-
-.avatar-btn:hover,
-.avatar-btn.selected {
-  border-color: #558b2f;
-  transform: scale(1.1);
-}
+/* Removed .avatar-selection p, .avatars, .avatar-btn, and .avatar-btn:hover, .avatar-btn.selected */
 
 .login-card form {
   display: flex;
@@ -85,44 +62,56 @@ font-family: monospace;
 
 .login-card label {
   text-align: left;
-  color: #33691e;
+  color: #FFFFFF; /* UI_WHITE_TEXT */
   font-weight: 500;
 }
 
 .login-card input {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid #c8e6c9;
-  border-radius: 4px;
+  border: 2px solid #4FC3F7; /* ACCENT_SKY_BLUE */
+  background: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  color: #212121; /* UI_TEXT_DARK */
+  border-radius: 5px; /* Rounded corners */
   font-size: 1rem;
+}
+
+.login-card input::placeholder {
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
 }
 
 .login-card input:focus {
   outline: none;
-  border-color: #66bb6a;
+  border-color: #F06292; /* ACCENT_PINK */
 }
 
 .login-btn {
   margin-top: 1rem;
-  background: #7cb342;
-  color: #fff;
-  padding: 0.6rem;
+  background: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  padding: 0.6rem 1rem; /* Adjusted padding for chunkiness */
   font-size: 1rem;
-  border: none;
-  border-radius: 4px;
+  border: 2px solid #FFEE58; /* ACCENT_YELLOW */
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer;
-  transition: background 0.2s;
+  font-weight: bold; /* Added font-weight */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Added box-shadow */
+  transition: transform 0.1s ease, background-color 0.2s; /* Adjusted transition */
 }
 
 .login-btn:hover {
-  background: #689f38;
+  background: #F06292; /* ACCENT_PINK */
+  border-color: #FFEE58; /* ACCENT_YELLOW */
+  transform: translateY(-1px); /* Added transform */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Adjusted box-shadow */
 }
 
 #desktop-screen {
   display: none;
   width: 100%;
   height: 100%;
-  background: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png') center/cover no-repeat, linear-gradient(135deg, #a8e063, #56ab2f);
+  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  color: #212121; /* UI_TEXT_DARK */
   position: relative;
   overflow: hidden;
 }
@@ -131,42 +120,107 @@ font-family: monospace;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 40px;
-  background: rgba(30, 60, 30, 0.85);
+  width: calc(100% - 10px); /* Adjusted for margin */
+  height: 30px; /* Adjusted height */
+  background: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  border-bottom: 3px solid #FFEE58; /* ACCENT_YELLOW */
+  /* border-top: 1px solid #444444; Removed */
   display: flex;
   align-items: center;
-  padding: 0 1rem;
-  color: #e8f5e9;
+  padding: 0 0.5rem; /* Adjusted padding */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border-radius: 10px; /* Full rounding */
+  margin: 5px; /* Added margin */
   font-weight: 500;
   z-index: 10;
 }
 
 #start-button {
-  background: #33691e;
-  padding: 4px 12px;
-  border-radius: 3px;
+  background: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  padding: 2px 8px; /* Adjusted padding */
+  border-radius: 8px; /* Rounded corners */
+  border: 2px outset #FFEE58; /* ACCENT_YELLOW */
+  font-size: 0.9em; /* Slightly smaller font */
+  font-weight: bold; /* Added font-weight */
+  padding: 5px 12px; /* Adjusted padding */
   display: flex;
   align-items: center;
-  gap: 4px;
+  /* gap: 4px; Removed gap as emoji is removed */
   cursor: pointer;
-  transition: background 0.2s;
+  transition: transform 0.1s ease, background-color 0.2s; /* Adjusted transition */
 }
 
 #start-button:hover {
-  background: #2e7d32;
+  background: #F06292; /* ACCENT_PINK */
+  transform: scale(1.05); /* Added transform */
+}
+
+/* Dropdown Styles */
+.dropdown-container {
+  position: relative; /* For positioning the menu */
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 0.8em; /* Smaller text for speed control */
+}
+
+#speed-control-trigger {
+  cursor: pointer;
+  padding: 3px 6px;
+  background-color: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border-radius: 5px;
+  border: 1px solid #FFEE58; /* ACCENT_YELLOW */
+  transition: background-color 0.2s;
+}
+
+#speed-control-trigger:hover {
+  background-color: #F06292; /* ACCENT_PINK */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position below the trigger */
+  left: 0;
+  background-color: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  border: 2px solid #FFEE58; /* ACCENT_YELLOW */
+  border-radius: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 2px 0 0 0;
+  min-width: 100px;
+  z-index: 1000; /* Ensure it's above other toolbar items if needed */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.speed-menu-hidden {
+  display: none !important; /* Hide by default */
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-menu li:hover {
+  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
 }
 
 .clock {
   margin-left: auto;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Press Start 2P', monospace; /* Changed font */
+  /* Color will be inherited from #toolbar: UI_WHITE_TEXT */
 }
 
 #info-btn {
-  background: #fff;
-  color: #33691e;
-  border: none;
-  border-radius: 50%;
+  /* Assuming this button should also fit the new theme */
+  background: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border: 1px solid #FFEE58; /* ACCENT_YELLOW */
+  border-radius: 50%; /* Keeping it round for now, can be changed */
   font-size: 1.4rem;
   width: 32px;
   height: 32px;
@@ -176,16 +230,20 @@ font-family: monospace;
 }
 
 #info-btn:hover {
-  background: #b3e7ae;
+  background: #F06292; /* ACCENT_PINK */
 }
 
 #desktop-area {
   position: absolute;
-  top: 40px;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 40px);
-  background: rgba(165, 214, 167, 0.6);
+  top: 40px; /* Adjusted for new toolbar height (30px) + margin (5px top + 5px bottom) */
+  left: 0; /* Or 5px if toolbar margin applies here too */
+  width: 100%; /* Or calc(100% - 10px) if toolbar margin applies */
+  height: calc(100% - 40px); /* Adjusted for new toolbar height + margin */
+  /* Removed previous background-color and background-image (gradient) */
+  background-image: url('https://64.media.tumblr.com/a8b1259381625eacadfd88e40e37ae73/795bab8c5363fda8-1e/s1280x1920/479539b4252bddeecfcd635b56dd778266f87f75.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: flex-start;
   padding: 1rem;
@@ -194,30 +252,63 @@ font-family: monospace;
   overflow: auto;
 }
 
+#desktop-username-display {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 15px; /* Adjust as needed */
+  font-size: 0.9em; /* Or a specific pixel value that fits the theme */
+  color: #FFFFFF; /* UI_WHITE_TEXT for visibility on the new background image */
+  background-color: rgba(0, 0, 0, 0.3); /* Subtle dark background for readability */
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.7); /* Ensure readability */
+  z-index: 5; /* Below toolbar (10) but above desktop area general content if needed */
+}
+
 .icon {
-  width: 100px;
+  width: 90px; /* Increased size */
+  height: 90px; /* Increased size */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FFFFFF; /* White border */
+  background-color: transparent; /* Transparent default background */
+  border-radius: 15px; /* More rounded for icons */
   text-align: center;
   cursor: pointer;
-  margin-bottom: 1.5rem;
-  transition: transform 0.2s, filter 0.2s;
+  margin-bottom: 1rem; /* Keep or adjust spacing */
+  transition: transform 0.2s, filter 0.2s; /* Adjusted transition for filter */
 }
 
 .icon:hover {
-  transform: scale(1.15);
+  transform: scale(1.1); /* Make it grow a bit */
+  filter: brightness(1.2); /* Generic hover brightness */
+  border-color: #FFEE58; /* ACCENT_YELLOW on hover */
 }
 
 .icon-img {
-  font-size: 4rem;
-  margin-bottom: 0.4rem;
-  pointer-events: none;
+  font-size: 3rem; /* Increased font size */
+  color: #FFFFFF; /* White color for icon symbol */
+  margin-bottom: 0.2rem; /* Space between letter and label */
+  pointer-events: none; /* Keep this */
 }
 
 .icon-label {
-  font-size: 1.2rem;
-  color: #2e7d32;
+  font-size: 0.75em; /* Adjusted font size */
+  color: #FFFFFF; /* White color for label */
+  font-family: 'Press Start 2P', monospace; /* Added font */
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5); /* Added text shadow */
+}
+
+.login-card input, .login-btn, button { /* General button styling for font */
+    font-family: 'Press Start 2P', monospace;
 }
 
 /* Animation classes */
+/* Ensure all animation classes have a base animation duration for JS to use if needed,
+   though the JS `animationMap` dur property is the primary source for timing.
+   The keyframes themselves should define one iteration of the animation. */
 .wiggle-anim {
   animation: wiggle 0.6s;
 }
@@ -465,16 +556,62 @@ font-family: monospace;
   box-shadow: 0 4px 16px #0003;
 }
 
+@keyframes tada {
+  from { transform: scale3d(1, 1, 1); }
+  10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
+  30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
+  40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.tada-anim { animation-name: tada; animation-duration: 1s; }
+
+@keyframes swing {
+  20% { transform: rotate3d(0, 0, 1, 15deg); }
+  40% { transform: rotate3d(0, 0, 1, -10deg); }
+  60% { transform: rotate3d(0, 0, 1, 5deg); }
+  80% { transform: rotate3d(0, 0, 1, -5deg); }
+  to { transform: rotate3d(0, 0, 1, 0deg); }
+}
+.swing-anim { animation-name: swing; transform-origin: top center; animation-duration: 1s; }
+
+@keyframes rubberBand {
+  from { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+  to { transform: scale3d(1, 1, 1); }
+}
+.rubberBand-anim { animation-name: rubberBand; animation-duration: 1s; }
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+.heartBeat-anim { animation-name: heartBeat; animation-timing-function: ease-in-out; animation-duration: 1.3s; }
+
+@keyframes customZoomEffect {
+  0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+  70% { opacity: 1; transform: scale(1.1) translateY(0); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+.customZoomEffect-anim { animation-name: customZoomEffect; animation-duration: 1s; }
+
+
 /* Desktop message */
 #desktop-message {
-  position: absolute;
+  position: absolute; /* Keep absolute for positioning on screen */
   bottom: 20px;
   left: 20px;
-  background: rgba(48, 63, 159, 0.92);
-  color: #fff;
-  padding: 0.8rem 1rem;
-  border-radius: 4px;
-  font-size: 2rem;
+  background: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  padding: 25px 1rem 0.8rem 1rem; /* Adjusted padding for title bar */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 1rem; /* Adjusted main text size */
   max-width: none;
   min-width: 160px;
   min-height: 40px;
@@ -482,78 +619,45 @@ font-family: monospace;
   transition: opacity 0.4s;
   pointer-events: none;
   z-index: 100;
+  border: 3px solid #4FC3F7; /* ACCENT_SKY_BLUE */
+  box-shadow: 0 0 10px #4FC3F780; /* ACCENT_SKY_BLUE_TRANSPARENT (assuming) */
+  position: relative; /* For pseudo-element positioning */
+}
+
+#desktop-message::before {
+  content: "SYSTEM MESSAGE"; /* Title bar text */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Title bar height */
+  background-color: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  font-family: 'Press Start 2P', monospace; /* Ensure pixel font */
+  font-size: 0.8em; /* Title bar font size */
+  padding: 2px 5px; /* Padding within the title bar */
+  box-sizing: border-box;
+  text-align: left;
+  border-radius: 10px 10px 0 0; /* Match parent's top rounding */
 }
 
 #desktop-message .desc {
-  font-size: 1.2rem;
+  font-size: 0.9rem; /* Adjusted desc size */
   margin-bottom: 0.2rem;
+  color: #FFFFFF; /* UI_WHITE_TEXT */
 }
 
 #desktop-message .css-code {
-  font-size: 1.2rem;
-  background: rgba(0, 0, 0, 0.13);
+  font-size: 0.9rem; /* Adjusted code size */
+  background: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  color: #212121; /* UI_TEXT_DARK */
+  border: 1px solid #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
   border-radius: 3px;
   padding: 3px 5px;
   margin: 0;
 }
 
-/* ============== “Learn to Code” MODAL ============== */
-.modal-hidden {
-  display: none;
-}
-
-#code-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.modal-content {
-  background: #f1f8e9;
-  padding: 2rem;
-  border-radius: 6px;
-  width: 500px;
-  max-width: 90%;
-  position: relative;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
-  max-height: 80%;
-}
-
-#modal-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.modal-content h2 {
-  color: #33691e;
-  margin-bottom: 1rem;
-}
-
-.modal-content pre {
-  background: #e8f5e9;
-  padding: 0.75rem;
-  border-radius: 4px;
-  overflow-x: auto;
-  margin-bottom: 1rem;
-}
-
-.modal-content code {
-  font-family: Consolas, 'Courier New', monospace;
-  font-size: 0.97rem;
-  display: block;
-  white-space: pre-wrap;
-}
+/* ============== “Learn to Code” MODAL (REMOVED) ============== */
 
 @media (max-width: 480px) {
   .login-card {
@@ -567,14 +671,189 @@ font-family: monospace;
   }
 
   .icon {
-    width: 60px;
+    width: 75px; /* Ensure media query icon size is also adjusted if needed */
+    height: 75px; /* Adjusted media query size */
   }
 
   .icon-img {
-    font-size: 1.5rem;
+    font-size: 2.2rem; /* Adjusted media query icon font size */
   }
 
   .icon-label {
-    font-size: 0.8rem;
+    font-size: 0.7em; /* Adjust media query icon label font size */
+    /* Text shadow will be inherited if needed */
   }
+}
+
+/* nth-child icon background colors */
+#desktop-area .icon:nth-child(1) { background-color: #31A8FF; } /* Blue */
+#desktop-area .icon:nth-child(2) { background-color: #FF7C00; } /* Orange */
+#desktop-area .icon:nth-child(3) { background-color: #FF3366; } /* Pink */
+#desktop-area .icon:nth-child(4) { background-color: #9900FF; } /* Purple */
+#desktop-area .icon:nth-child(5) { background-color: #00C8C8; } /* Teal */
+#desktop-area .icon:nth-child(6) { background-color: #FFD700; } /* Gold/Yellow */
+#desktop-area .icon:nth-child(7) { background-color: #50C878; } /* Emerald Green */
+#desktop-area .icon:nth-child(8) { background-color: #FF69B4; } /* Hot Pink */
+#desktop-area .icon:nth-child(9) { background-color: #40E0D0; } /* Turquoise */
+#desktop-area .icon:nth-child(10) { background-color: #BA55D3; } /* Medium Orchid */
+#desktop-area .icon:nth-child(11) { background-color: #FF8C00; } /* Dark Orange */
+#desktop-area .icon:nth-child(12) { background-color: #20B2AA; } /* Light Sea Green */
+#desktop-area .icon:nth-child(13) { background-color: #FF4500; } /* OrangeRed */
+#desktop-area .icon:nth-child(14) { background-color: #DA70D6; } /* Orchid */
+#desktop-area .icon:nth-child(15) { background-color: #32CD32; } /* LimeGreen */
+#desktop-area .icon:nth-child(16) { background-color: #4682B4; } /* SteelBlue */
+#desktop-area .icon:nth-child(17) { background-color: #D2691E; } /* Chocolate for Artist icon */
+
+/* ============== Micro-Paint Application Styles ============== */
+.paint-app-hidden {
+  display: none !important;
+}
+
+#paint-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Higher than desktop message, similar to old code modal */
+  pointer-events: none; /* Managed by JS */
+}
+
+.paint-modal-content {
+  background: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  border-radius: 15px;
+  padding: 15px;
+  width: 80vw; /* Responsive width */
+  max-width: 700px; /* Max size */
+  height: 80vh;
+  max-height: 600px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  border: 3px solid #FFEE58; /* ACCENT_YELLOW */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto; /* Re-enable for content */
+}
+
+.paint-title-bar {
+  background-color: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: 10px 10px 0 0; /* Match modal's top rounding if padding is outside */
+  margin: -15px -15px 10px -15px; /* Extend to edges if padding is on modal-content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.paint-close-button {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.paint-close-button:hover {
+  color: #FFEE58; /* ACCENT_YELLOW */
+}
+
+#paint-toolbar {
+  display: flex;
+  flex-wrap: wrap; /* Allow controls to wrap on smaller modals */
+  gap: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  border-radius: 8px;
+}
+
+.paint-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT for labels */
+  font-size: 0.9em;
+}
+.paint-controls-group span {
+    font-weight: bold;
+}
+
+.paint-color {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%; /* Circular color swatches */
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.paint-color:hover {
+  transform: scale(1.1);
+}
+.paint-color.selected-color {
+  border-color: #F06292; /* ACCENT_PINK for selected border */
+  box-shadow: 0 0 0 2px #F06292; /* Outer glow for selected */
+}
+
+.paint-brush-size {
+  padding: 5px 8px;
+  border: 2px solid #4FC3F7; /* ACCENT_SKY_BLUE */
+  background-color: #FFFFFF;
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace; /* Ensure font consistency */
+  font-size: 0.8em;
+  transition: background-color 0.2s, color 0.2s;
+}
+.paint-brush-size:hover {
+  background-color: #FFEE58; /* ACCENT_YELLOW */
+}
+.paint-brush-size.selected-brush {
+  background-color: #F06292; /* ACCENT_PINK */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border-color: #FFFFFF;
+}
+
+#clear-canvas-button {
+  padding: 6px 10px;
+  border: 2px solid #FF7C00; /* Ai Orange for clear button */
+  background-color: #FFFFFF;
+  color: #FF7C00;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+#clear-canvas-button:hover {
+  background-color: #FF7C00;
+  color: #FFFFFF;
+}
+
+#paint-canvas {
+  border: 2px solid #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
+  background-color: #FFFFFF; /* Default white drawing surface */
+  width: 100%; /* Take available width within content area */
+  height: 100%; /* Take available height (flex-grow basically from parent) */
+  display: block; /* Remove extra space below canvas */
+  cursor: crosshair;
+  border-radius: 8px; /* Rounded corners for the canvas itself */
+}
+
+.retro-popup {
+  background-color: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border: 2px solid #FFEE58; /* ACCENT_YELLOW */
+  padding: 0.5rem 1rem; /* Keep existing padding or adjust */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px #FFEE5880; /* ACCENT_YELLOW_TRANSPARENT */
+  /* Ensure position and transition styles from JS are not overridden if not needed,
+     or redefine them here if we want to manage all styling via CSS for this element.
+     The JS sets: position, bottom, right, opacity, transition. These are probably fine. */
 }

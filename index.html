@@ -15,15 +15,6 @@
   <div id="login-screen">
     <div class="login-card">
       <h1>Welcome to <span class="grass-text">GrassOS</span></h1>
-      <div class="avatar-selection">
-        <p>Select an avatar:</p>
-        <div class="avatars">
-          <button class="avatar-btn" data-avatar="🐸">🐸</button>
-          <button class="avatar-btn" data-avatar="🐝">🐝</button>
-          <button class="avatar-btn" data-avatar="🐢">🐢</button>
-          <button class="avatar-btn" data-avatar="🦎">🦎</button>
-        </div>
-      </div>
       <form id="login-form">
         <label>
           Username<br/>
@@ -41,76 +32,99 @@
   <!-- ======= DESKTOP SCREEN ======= -->
   <div id="desktop-screen">
     <div id="toolbar">
-      <div id="start-button"><span>🌱</span> Start</div>
+      <div id="start-button">START</div>
+      <div id="speed-control-dropdown" class="dropdown-container">
+        <span id="speed-control-trigger">Speed: Regular ▾</span>
+        <ul id="speed-menu" class="dropdown-menu speed-menu-hidden">
+          <li data-speed="1.0">Regular</li>
+          <li data-speed="0.5">Slow</li>
+          <li data-speed="1.5">Fast</li>
+        </ul>
+      </div>
       <div class="clock" id="clock"></div>
     </div>
     <div id="desktop-area">
+      <div id="desktop-username-display"></div> <!-- New element -->
       <!-- Animation Icons -->
       <div class="icon animate-icon" id="icon-wiggle" 
         data-desc="Wiggle: a playful quick back-and-forth rotation." 
         data-css="@keyframes wiggle {0%{transform:rotate(0);}25%{transform:rotate(10deg);}50%{transform:rotate(-10deg);}75%{transform:rotate(8deg);}100%{transform:rotate(0);}}">
-        <div class="icon-img">🎉</div>
+        <div class="icon-img">W</div>
         <div class="icon-label">Wiggle</div>
       </div>
       <div class="icon animate-icon" id="icon-scale"
         data-desc="Scale: pulsing grow and shrink."
         data-css="@keyframes pulse {0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}">
-        <div class="icon-img">📐</div>
+        <div class="icon-img">S</div>
         <div class="icon-label">Scale</div>
       </div>
       <div class="icon animate-icon" id="icon-hue"
         data-desc="Hue Shift: cycles through the color wheel."
         data-css="@keyframes hueShift {0%{filter:hue-rotate(0deg);}100%{filter:hue-rotate(360deg);}}">
-        <div class="icon-img">🌈</div>
+        <div class="icon-img">H</div>
         <div class="icon-label">Hue Shift</div>
       </div>
       <div class="icon animate-icon" id="icon-rotate"
         data-desc="Rotate: spins 360°."
         data-css="@keyframes rotate360 {0%{transform:rotate(0);}100%{transform:rotate(360deg);}}">
-        <div class="icon-img">🔄</div>
+        <div class="icon-img">R</div>
         <div class="icon-label">Rotate</div>
       </div>
       <div class="icon animate-icon" id="icon-skew"
         data-desc="Skew: gets slanty and straightens out."
         data-css="@keyframes skew {0%{transform:skewX(0);}40%{transform:skewX(25deg);}80%{transform:skewX(-25deg);}100%{transform:skewX(0);}}">
-        <div class="icon-img">🦀</div>
+        <div class="icon-img">K</div>
         <div class="icon-label">Skew</div>
       </div>
       <div class="icon animate-icon" id="icon-shadow"
         data-desc="Shadow Pulse: the shadow grows and shrinks."
         data-css="@keyframes shadowPulse {0%{box-shadow:0 4px 16px #0003;}50%{box-shadow:0 10px 40px #2228;}100%{box-shadow:0 4px 16px #0003;}}">
-        <div class="icon-img">💡</div>
+        <div class="icon-img">D</div>
         <div class="icon-label">Shadow Pulse</div>
       </div>
       <div class="icon animate-icon" id="icon-border"
         data-desc="Border Dance: border color and width animate."
         data-css="@keyframes borderDance {0%{border-color:#7cb342;border-width:2px;}50%{border-color:#ff4081;border-width:8px;}100%{border-color:#7cb342;border-width:2px;}}">
-        <div class="icon-img">🖼️</div>
+        <div class="icon-img">B</div>
         <div class="icon-label">Border Dance</div>
       </div>
       <div class="icon animate-icon" id="icon-sparkle"
         data-desc="Sparkle: flashes in brightness."
         data-css="@keyframes sparkle {0%,100%{filter:brightness(1);}20%,80%{filter:brightness(2.5);}}">
-        <div class="icon-img">✨</div>
+        <div class="icon-img">P</div>
         <div class="icon-label">Sparkle</div>
       </div>
       <div class="icon animate-icon" id="icon-fade"
         data-desc="Fade: quickly fades out and in."
         data-css="@keyframes fade {0%{opacity:1;}40%{opacity:0.1;}60%{opacity:0.1;}100%{opacity:1;}}">
-        <div class="icon-img">🌫️</div>
+        <div class="icon-img">F</div>
         <div class="icon-label">Fade</div>
       </div>
       <div class="icon animate-icon" id="icon-jelly"
         data-desc="Jelly: squishes and stretches like Jell-O."
         data-css="@keyframes jelly {0%,100%{transform:scale(1,1);}30%{transform:scale(2.25,0.75);}40%{transform:scale(0.75,1.25);}50%{transform:scale(2.15,0.85);}65%{transform:scale(0.45,1.05);}75%{transform:scale(1.05,0.95);}85%{transform:scale(0.98,1.02);}}">
-        <div class="icon-img">🍮</div>
+        <div class="icon-img">J</div>
         <div class="icon-label">Jelly</div>
       </div>
       <div class="icon animate-icon" id="icon-glitch"
         data-desc="Glitch: jitters like a glitched screen."
         data-css="@keyframes glitch {0%{transform:none;}20%{transform:translate(-2px,1px) skewX(5deg);}40%{transform:translate(2px,-2px) skewX(-8deg);}60%{transform:translate(-1px,2px) skewY(3deg);}80%{transform:translate(1px,-1px) skewY(-4deg);}100%{transform:none;}}">
-        <div class="icon-img">👾</div>
+        <div class="icon-img">G</div>
         <div class="icon-label">Glitch</div>
+      </div>
+
+      <!-- New Icons -->
+      <div class="icon animate-icon" id="icon-tada" data-desc="Tada: a fun, attention-grabbing wobble." data-css="@keyframes tada { from { transform: scale3d(1, 1, 1); } 10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); } 30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); } 40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); } to { transform: scale3d(1, 1, 1); } }"> <div class="icon-img">T</div> <div class="icon-label">Tada</div> </div>
+      <div class="icon animate-icon" id="icon-swing" data-desc="Swing: oscillates like a pendulum." data-css="@keyframes swing { 20% { transform: rotate3d(0, 0, 1, 15deg); } 40% { transform: rotate3d(0, 0, 1, -10deg); } 60% { transform: rotate3d(0, 0, 1, 5deg); } 80% { transform: rotate3d(0, 0, 1, -5deg); } to { transform: rotate3d(0, 0, 1, 0deg); } }"> <div class="icon-img">X</div> <div class="icon-label">Swing</div> </div>
+      <div class="icon animate-icon" id="icon-rubberBand" data-desc="RubberBand: stretches and snaps back." data-css="@keyframes rubberBand { from { transform: scale3d(1, 1, 1); } 30% { transform: scale3d(1.25, 0.75, 1); } 40% { transform: scale3d(0.75, 1.25, 1); } 50% { transform: scale3d(1.15, 0.85, 1); } 65% { transform: scale3d(0.95, 1.05, 1); } 75% { transform: scale3d(1.05, 0.95, 1); } to { transform: scale3d(1, 1, 1); } }"> <div class="icon-img">U</div> <div class="icon-label">RubberBand</div> </div>
+      <div class="icon animate-icon" id="icon-heartBeat" data-desc="HeartBeat: pulses rhythmically." data-css="@keyframes heartBeat { 0% { transform: scale(1); } 14% { transform: scale(1.3); } 28% { transform: scale(1); } 42% { transform: scale(1.3); } 70% { transform: scale(1); } }"> <div class="icon-img">M</div> <div class="icon-label">HeartBeat</div> </div>
+      <div class="icon animate-icon" id="icon-customZoom" data-desc="Zoom Effect: zooms in with a little bounce." data-css="@keyframes customZoomEffect { 0% { opacity: 0; transform: scale(0.5) translateY(20px); } 70% { opacity: 1; transform: scale(1.1) translateY(0); } 100% { opacity: 1; transform: scale(1) translateY(0); } }"> <div class="icon-img">Z</div> <div class="icon-label">Zoomer</div> </div>
+
+      <div class="icon animate-icon" id="icon-artist"
+        data-desc="Artist: Opens a simple drawing application."
+        data-css="/* CSS for a Paint-like app would be extensive. This is a placeholder. */">
+        <div class="icon-img">A</div>
+        <div class="icon-label">Artist</div>
       </div>
       <!-- Desktop message for animation descriptions and code -->
       <div id="desktop-message">
@@ -121,5 +135,36 @@
   </div>
 
   <script src="script.js"></script>
+
+  <div id="paint-modal" class="paint-app-hidden"> <!-- Initially hidden -->
+    <div class="paint-modal-content">
+      <div class="paint-title-bar">
+        <span>Micro Artist</span>
+        <button id="paint-modal-close" class="paint-close-button">&times;</button>
+      </div>
+      <div id="paint-toolbar">
+        <div class="paint-controls-group">
+          <span>Colors:</span>
+          <div class="paint-color" data-color="black" style="background-color: black;"></div>
+          <div class="paint-color" data-color="red" style="background-color: red;"></div>
+          <div class="paint-color" data-color="green" style="background-color: green;"></div>
+          <div class="paint-color" data-color="blue" style="background-color: blue;"></div>
+          <div class="paint-color" data-color="yellow" style="background-color: yellow;"></div>
+          <div class="paint-color" data-color="white" style="background-color: white;"></div> <!-- Eraser on colored bg -->
+        </div>
+        <div class="paint-controls-group">
+          <span>Brush Size:</span>
+          <button class="paint-brush-size" data-size="2">S</button>
+          <button class="paint-brush-size" data-size="5">M</button>
+          <button class="paint-brush-size" data-size="10">L</button>
+          <button class="paint-brush-size" data-size="20">XL</button>
+        </div>
+        <div class="paint-controls-group">
+          <button id="clear-canvas-button">Clear</button>
+        </div>
+      </div>
+      <canvas id="paint-canvas"></canvas>
+    </div>
+  </div>
 </body>
 </html>
