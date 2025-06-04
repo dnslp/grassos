@@ -120,6 +120,12 @@
       <div class="icon animate-icon" id="icon-heartBeat" data-desc="HeartBeat: pulses rhythmically." data-css="@keyframes heartBeat { 0% { transform: scale(1); } 14% { transform: scale(1.3); } 28% { transform: scale(1); } 42% { transform: scale(1.3); } 70% { transform: scale(1); } }"> <div class="icon-img">M</div> <div class="icon-label">HeartBeat</div> </div>
       <div class="icon animate-icon" id="icon-customZoom" data-desc="Zoom Effect: zooms in with a little bounce." data-css="@keyframes customZoomEffect { 0% { opacity: 0; transform: scale(0.5) translateY(20px); } 70% { opacity: 1; transform: scale(1.1) translateY(0); } 100% { opacity: 1; transform: scale(1) translateY(0); } }"> <div class="icon-img">Z</div> <div class="icon-label">Zoomer</div> </div>
 
+      <div class="icon animate-icon" id="icon-artist"
+        data-desc="Artist: Opens a simple drawing application."
+        data-css="/* CSS for a Paint-like app would be extensive. This is a placeholder. */">
+        <div class="icon-img">A</div>
+        <div class="icon-label">Artist</div>
+      </div>
       <!-- Desktop message for animation descriptions and code -->
       <div id="desktop-message">
         <div class="desc"></div>
@@ -129,5 +135,36 @@
   </div>
 
   <script src="script.js"></script>
+
+  <div id="paint-modal" class="paint-app-hidden"> <!-- Initially hidden -->
+    <div class="paint-modal-content">
+      <div class="paint-title-bar">
+        <span>Micro Artist</span>
+        <button id="paint-modal-close" class="paint-close-button">&times;</button>
+      </div>
+      <div id="paint-toolbar">
+        <div class="paint-controls-group">
+          <span>Colors:</span>
+          <div class="paint-color" data-color="black" style="background-color: black;"></div>
+          <div class="paint-color" data-color="red" style="background-color: red;"></div>
+          <div class="paint-color" data-color="green" style="background-color: green;"></div>
+          <div class="paint-color" data-color="blue" style="background-color: blue;"></div>
+          <div class="paint-color" data-color="yellow" style="background-color: yellow;"></div>
+          <div class="paint-color" data-color="white" style="background-color: white;"></div> <!-- Eraser on colored bg -->
+        </div>
+        <div class="paint-controls-group">
+          <span>Brush Size:</span>
+          <button class="paint-brush-size" data-size="2">S</button>
+          <button class="paint-brush-size" data-size="5">M</button>
+          <button class="paint-brush-size" data-size="10">L</button>
+          <button class="paint-brush-size" data-size="20">XL</button>
+        </div>
+        <div class="paint-controls-group">
+          <button id="clear-canvas-button">Clear</button>
+        </div>
+      </div>
+      <canvas id="paint-canvas"></canvas>
+    </div>
+  </div>
 </body>
 </html>

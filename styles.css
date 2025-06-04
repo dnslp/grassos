@@ -702,6 +702,149 @@ html {
 #desktop-area .icon:nth-child(14) { background-color: #DA70D6; } /* Orchid */
 #desktop-area .icon:nth-child(15) { background-color: #32CD32; } /* LimeGreen */
 #desktop-area .icon:nth-child(16) { background-color: #4682B4; } /* SteelBlue */
+#desktop-area .icon:nth-child(17) { background-color: #D2691E; } /* Chocolate for Artist icon */
+
+/* ============== Micro-Paint Application Styles ============== */
+.paint-app-hidden {
+  display: none !important;
+}
+
+#paint-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Higher than desktop message, similar to old code modal */
+  pointer-events: none; /* Managed by JS */
+}
+
+.paint-modal-content {
+  background: #66BB6A; /* GRASS_GREEN_MEDIUM */
+  border-radius: 15px;
+  padding: 15px;
+  width: 80vw; /* Responsive width */
+  max-width: 700px; /* Max size */
+  height: 80vh;
+  max-height: 600px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  border: 3px solid #FFEE58; /* ACCENT_YELLOW */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto; /* Re-enable for content */
+}
+
+.paint-title-bar {
+  background-color: #4FC3F7; /* ACCENT_SKY_BLUE */
+  color: #FFFFFF;
+  padding: 8px 12px;
+  border-radius: 10px 10px 0 0; /* Match modal's top rounding if padding is outside */
+  margin: -15px -15px 10px -15px; /* Extend to edges if padding is on modal-content */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.paint-close-button {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.paint-close-button:hover {
+  color: #FFEE58; /* ACCENT_YELLOW */
+}
+
+#paint-toolbar {
+  display: flex;
+  flex-wrap: wrap; /* Allow controls to wrap on smaller modals */
+  gap: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #A5D6A7; /* GRASS_GREEN_LIGHT_BG */
+  border-radius: 8px;
+}
+
+.paint-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT for labels */
+  font-size: 0.9em;
+}
+.paint-controls-group span {
+    font-weight: bold;
+}
+
+.paint-color {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%; /* Circular color swatches */
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.paint-color:hover {
+  transform: scale(1.1);
+}
+.paint-color.selected-color {
+  border-color: #F06292; /* ACCENT_PINK for selected border */
+  box-shadow: 0 0 0 2px #F06292; /* Outer glow for selected */
+}
+
+.paint-brush-size {
+  padding: 5px 8px;
+  border: 2px solid #4FC3F7; /* ACCENT_SKY_BLUE */
+  background-color: #FFFFFF;
+  color: #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace; /* Ensure font consistency */
+  font-size: 0.8em;
+  transition: background-color 0.2s, color 0.2s;
+}
+.paint-brush-size:hover {
+  background-color: #FFEE58; /* ACCENT_YELLOW */
+}
+.paint-brush-size.selected-brush {
+  background-color: #F06292; /* ACCENT_PINK */
+  color: #FFFFFF; /* UI_WHITE_TEXT */
+  border-color: #FFFFFF;
+}
+
+#clear-canvas-button {
+  padding: 6px 10px;
+  border: 2px solid #FF7C00; /* Ai Orange for clear button */
+  background-color: #FFFFFF;
+  color: #FF7C00;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+#clear-canvas-button:hover {
+  background-color: #FF7C00;
+  color: #FFFFFF;
+}
+
+#paint-canvas {
+  border: 2px solid #33691E; /* GRASS_GREEN_DARK_TEXT_ON_LIGHT */
+  background-color: #FFFFFF; /* Default white drawing surface */
+  width: 100%; /* Take available width within content area */
+  height: 100%; /* Take available height (flex-grow basically from parent) */
+  display: block; /* Remove extra space below canvas */
+  cursor: crosshair;
+  border-radius: 8px; /* Rounded corners for the canvas itself */
+}
 
 .retro-popup {
   background-color: #66BB6A; /* GRASS_GREEN_MEDIUM */

@@ -12,6 +12,21 @@ let activeIconIntervalId = null;
 let currentlyAnimatingIconElement = null;
 let currentAnimationClass = ''; // To easily remove the correct class
 
+// Micro-Paint Application Variables
+const artistIcon = document.getElementById('icon-artist');
+const paintModal = document.getElementById('paint-modal');
+const paintModalCloseBtn = document.getElementById('paint-modal-close');
+const paintCanvas = document.getElementById('paint-canvas');
+const paintToolbar = document.getElementById('paint-toolbar'); // For attaching delegated listeners or getting controls
+const clearCanvasBtn = document.getElementById('clear-canvas-button');
+
+let paintCtx = null;
+let isPainting = false;
+let currentPaintColor = 'black';
+let currentBrushSize = 5;
+let lastPaintX = 0;
+let lastPaintY = 0;
+
 function playStartupSounds() {
   // Ensure audio elements are reset and playbackRate is set
   win95Sound.currentTime = 0;
@@ -60,6 +75,7 @@ loginForm.addEventListener('submit', e => {
     if (usernameDisplayElement && usernameValue) {
       usernameDisplayElement.textContent = `User: ${usernameValue}`;
     }
+    initializePaintApp(); // Initialize Paint App once desktop is ready
   }, 800);
 });
 
@@ -116,11 +132,18 @@ const animationMap = {
 const animationIcons = document.querySelectorAll('.animate-icon');
 animationIcons.forEach(icon => {
   icon.addEventListener('click', e => {
-    const clickedIconEl = e.currentTarget; // Use currentTarget for the element listener is attached to
+    const clickedIconEl = e.currentTarget;
+
+    if (clickedIconEl.id === 'icon-artist') {
+      // The 'icon-artist' click is handled separately by initializePaintApp to open the modal
+      // It should not use the repeating animation logic
+      return;
+    }
+
     const iconId = clickedIconEl.id;
     const animData = animationMap[iconId];
 
-    if (!animData) return; // Should not happen if map is correct
+    if (!animData && clickedIconEl.id !== 'icon-artist') return; // Check animData only if not artist icon
 
     const newAnimationClass = animData.cls;
     const animDuration = animData.dur;
@@ -219,4 +242,148 @@ if (startButton) {
   startButton.addEventListener('click', () => {
     playStartupSounds(); // Call the existing function
   });
+}
+
+// Micro-Paint Application Functions
+function initializePaintApp() {
+  if (!paintCanvas) return; // Ensure canvas exists
+  paintCtx = paintCanvas.getContext('2d');
+
+  // Set initial canvas size dynamically when modal opens (see openPaintModal)
+  // For now, set default drawing style
+  paintCtx.strokeStyle = currentPaintColor;
+  paintCtx.lineWidth = currentBrushSize;
+  paintCtx.lineCap = 'round'; // Rounded line ends
+  paintCtx.lineJoin = 'round'; // Rounded line joins
+
+  // Event Listeners for Drawing on Canvas
+  paintCanvas.addEventListener('mousedown', startPainting);
+  paintCanvas.addEventListener('mousemove', drawPainting);
+  paintCanvas.addEventListener('mouseup', stopPainting);
+  paintCanvas.addEventListener('mouseleave', stopPainting); // Stop if mouse leaves canvas
+
+  // Event Listeners for Controls
+  if (paintToolbar) { // Check if paintToolbar exists
+    const colorSwatches = paintToolbar.querySelectorAll('.paint-color');
+    colorSwatches.forEach(swatch => {
+      swatch.addEventListener('click', (e) => {
+        currentPaintColor = e.target.dataset.color;
+        if (paintCtx) paintCtx.strokeStyle = currentPaintColor;
+        // Update selected state
+        colorSwatches.forEach(s => s.classList.remove('selected-color'));
+        e.target.classList.add('selected-color');
+      });
+    });
+    // Set initial selected color
+    const initialColorSwatch = paintToolbar.querySelector(`.paint-color[data-color="${currentPaintColor}"]`);
+    if (initialColorSwatch) initialColorSwatch.classList.add('selected-color');
+
+
+    const brushSizeBtns = paintToolbar.querySelectorAll('.paint-brush-size');
+    brushSizeBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        currentBrushSize = parseInt(e.target.dataset.size, 10);
+        if (paintCtx) paintCtx.lineWidth = currentBrushSize;
+        // Update selected state
+        brushSizeBtns.forEach(b => b.classList.remove('selected-brush'));
+        e.target.classList.add('selected-brush');
+      });
+    });
+    // Set initial selected brush
+    const initialBrushButton = paintToolbar.querySelector(`.paint-brush-size[data-size="${currentBrushSize}"]`);
+    if (initialBrushButton) initialBrushButton.classList.add('selected-brush');
+  }
+
+
+  if (clearCanvasBtn) {
+    clearCanvasBtn.addEventListener('click', () => {
+      if (paintCtx) paintCtx.clearRect(0, 0, paintCanvas.width, paintCanvas.height);
+    });
+  }
+
+  // Modal Open/Close
+  if (artistIcon && paintModal) {
+    artistIcon.addEventListener('click', () => {
+          // Provide one-shot animation feedback
+          const feedbackAnimClass = 'pulse-anim'; // Re-use existing pulse animation
+          const feedbackAnimData = animationMap['icon-scale']; // 'icon-scale' uses 'pulse-anim'
+
+          if (feedbackAnimData && feedbackAnimData.cls === feedbackAnimClass) {
+            artistIcon.classList.add(feedbackAnimClass);
+            setTimeout(() => {
+              artistIcon.classList.remove(feedbackAnimClass);
+            }, feedbackAnimData.dur); // Use duration from animationMap
+          } else {
+            // Fallback if pulse-anim or its data is not found as expected
+            artistIcon.classList.add('pulse-anim'); // Apply class directly
+             setTimeout(() => {
+               artistIcon.classList.remove('pulse-anim');
+             }, 600); // Default duration
+          }
+
+          const desc = artistIcon.dataset.desc || '';
+          const css = artistIcon.dataset.css || ''; // This was a placeholder, might be empty
+          showDesktopMessage(desc, css); // Show system message for artist icon
+
+          openPaintModal();
+        });
+  }
+  if (paintModalCloseBtn && paintModal) {
+    paintModalCloseBtn.addEventListener('click', closePaintModal);
+  }
+  if (paintModal) {
+    paintModal.addEventListener('click', (event) => {
+      if (event.target === paintModal) {
+        closePaintModal();
+      }
+    });
+  }
+}
+
+function sizePaintCanvas() {
+  if (!paintCanvas || !paintCtx) return;
+  const rect = paintCanvas.getBoundingClientRect();
+  paintCanvas.width = rect.width;
+  paintCanvas.height = rect.height;
+  paintCtx.strokeStyle = currentPaintColor;
+  paintCtx.lineWidth = currentBrushSize;
+  paintCtx.lineCap = 'round';
+  paintCtx.lineJoin = 'round';
+}
+
+function openPaintModal() {
+  if (paintModal) {
+    paintModal.classList.remove('paint-app-hidden');
+    paintModal.style.pointerEvents = 'auto';
+    setTimeout(sizePaintCanvas, 0);
+  }
+}
+
+function closePaintModal() {
+  if (paintModal) {
+    paintModal.classList.add('paint-app-hidden');
+    paintModal.style.pointerEvents = 'none';
+  }
+}
+
+function startPainting(e) {
+  if (!paintCtx) return;
+  isPainting = true;
+  [lastPaintX, lastPaintY] = [e.offsetX, e.offsetY];
+  paintCtx.beginPath();
+  paintCtx.moveTo(lastPaintX, lastPaintY);
+}
+
+function drawPainting(e) {
+  if (!isPainting || !paintCtx) return;
+  const currentX = e.offsetX;
+  const currentY = e.offsetY;
+  paintCtx.lineTo(currentX, currentY);
+  paintCtx.stroke();
+  [lastPaintX, lastPaintY] = [currentX, currentY];
+}
+
+function stopPainting() {
+  if (!isPainting) return;
+  isPainting = false;
 }
