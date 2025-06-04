@@ -96,23 +96,17 @@ function startClock() {
 function showWelcomePopup() {
   const popup = document.createElement('div');
   popup.textContent = `Hello, ${document.getElementById('username').value}!`;
-<<<<<<< HEAD
   popup.className = 'welcome-popup retro-popup'; // Added a class
   popup.style.position = 'fixed'; popup.style.bottom = '20px'; popup.style.right = '20px';
   // popup.style.background = '#33691e'; // Remove this
   // popup.style.color = '#fff'; // Remove this
   popup.style.padding = '0.5rem 1rem';
   popup.style.borderRadius = '4px'; popup.style.boxShadow = '0 5px 10px rgba(0,0,0,0.3)';
-=======
-  popup.style.position = 'fixed'; popup.style.top = '20px'; popup.style.right = '20px';
-  popup.style.background = '#33691e'; popup.style.color = '#fff'; popup.style.padding = '0.5rem 1rem';
-  popup.style.borderRadius = '8px'; popup.style.boxShadow = '0 5px 10px rgba(0,0,0,0.3)';
->>>>>>> main
   popup.style.opacity = '0'; popup.style.transition = 'opacity 0.5s';
   document.body.appendChild(popup);
   setTimeout(() => { popup.style.opacity = '1'; }, 50);
-  setTimeout(() => { popup.style.opacity = '0'; }, 20500);
-  setTimeout(() => { if (popup.parentElement) popup.parentElement.removeChild(popup); }, 30000);
+  setTimeout(() => { popup.style.opacity = '0'; }, 2500);
+  setTimeout(() => { if (popup.parentElement) popup.parentElement.removeChild(popup); }, 3000);
 }
 
 /* Animation icon logic */
@@ -139,11 +133,11 @@ const animationIcons = document.querySelectorAll('.animate-icon');
 animationIcons.forEach(icon => {
   icon.addEventListener('click', e => {
     const clickedIconEl = e.currentTarget;
-
+    
     if (clickedIconEl.id === 'icon-artist') {
       // The 'icon-artist' click is handled separately by initializePaintApp to open the modal
       // It should not use the repeating animation logic
-      return;
+      return; 
     }
 
     const iconId = clickedIconEl.id;
@@ -262,7 +256,7 @@ function initializePaintApp() {
 
   if (!paintCanvas) { // Critical check after attempting to get element
       // console.error("Paint canvas not found during init!"); // Debugging thought
-      return;
+      return; 
   }
   paintCtx = paintCanvas.getContext('2d');
 
@@ -319,24 +313,34 @@ function initializePaintApp() {
   }
 
   // Modal Open/Close
-  if (artistIcon && paintModal) { // Keep this check
+  if (artistIcon && paintModal) { // This check remains important
     artistIcon.addEventListener('click', () => {
-      // Simple visual debug: Change artistIcon's border color to confirm click listener fires
-      // This is a temporary debug step.
-      if (artistIcon) { // Check artistIcon again just in case of closure issues (unlikely here)
-        artistIcon.style.borderColor = 'red'; // Temporary visual feedback
-        setTimeout(() => {
-          artistIcon.style.borderColor = ''; // Reset after a bit
-        }, 1000);
-      }
+      // Provide one-shot animation feedback
+      const feedbackAnimClass = 'pulse-anim'; 
+      const feedbackAnimData = animationMap['icon-scale']; // 'icon-scale' uses 'pulse-anim'
 
-      // Directly call openPaintModal without other logic for now
+      if (feedbackAnimData && feedbackAnimData.cls === feedbackAnimClass) {
+        artistIcon.classList.add(feedbackAnimClass);
+        setTimeout(() => {
+          artistIcon.classList.remove(feedbackAnimClass);
+        }, feedbackAnimData.dur); // Use duration from animationMap
+      } else {
+        // Fallback if pulse-anim or its data is not found as expected
+        artistIcon.classList.add('pulse-anim'); // Apply class directly
+        setTimeout(() => {
+          artistIcon.classList.remove('pulse-anim');
+        }, 600); // Default duration
+      }
+      
+      // Show system message for artist icon
+      const desc = artistIcon.dataset.desc || '';
+      // The data-css for icon-artist was a placeholder: "/* CSS for a Paint-like app would be extensive. This is a placeholder. */"
+      // This is fine for display.
+      const css = artistIcon.dataset.css || ''; 
+      showDesktopMessage(desc, css);
+      
       openPaintModal();
     });
-  } else {
-    // If we reach here, it means artistIcon or paintModal was null during initialization.
-    // This would be a critical issue. For debugging, we'd want to know.
-    // (No direct way to alert user, but this indicates a setup failure)
   }
   if (paintModalCloseBtn && paintModal) {
     paintModalCloseBtn.addEventListener('click', closePaintModal);
@@ -365,7 +369,7 @@ function openPaintModal() {
   if (paintModal) {
     paintModal.classList.remove('paint-app-hidden');
     paintModal.style.pointerEvents = 'auto';
-    setTimeout(sizePaintCanvas, 0);
+    setTimeout(sizePaintCanvas, 0); 
   }
 }
 
